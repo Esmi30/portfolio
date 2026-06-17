@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edgardo Torres - AI Automation Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080c10;
+      --surface:   #0f1620;
+      --surface2:  #141d2a;
+      --border:    #1c2840;
+      --accent:    #4f8ef7;
+      --accent2:   #7b5ea7;
+      --accent-dim: rgba(79,142,247,0.12);
+      --text:      #dde6f0;
+      --muted:     #5c7494;
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(8,12,16,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 2.5rem 5rem;
+      max-width: 1000px; margin: 0 auto;
+      position: relative;
+    }
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 2.5rem; height: 1px;
+      background: var(--accent);
+      display: block;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #6ba3ff; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── STACK TICKER ── */
+    .ticker-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      padding: 0.9rem 0;
+    }
+    .ticker-track {
+      display: flex; gap: 0;
+      animation: ticker 30s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0 2rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+    }
+    .ticker-item img { width: 16px; height: 16px; object-fit: contain; filter: grayscale(0.3); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 5rem 2.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+    .section-desc {
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 3rem;
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .about-card {
+      background: var(--surface);
+      padding: 2rem 1.75rem;
+    }
+    .about-card-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .about-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+    .about-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .skill-block {
+      background: var(--surface);
+      padding: 1.75rem;
+    }
+    .skill-block-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .skill-block-icon {
+      width: 32px; height: 32px;
+      background: var(--accent-dim);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .skill-block h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .skill-tag img { width: 12px; height: 12px; object-fit: contain; }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden; cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s; position: relative;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .project-nda {
+      position: absolute; top: 0.75rem; right: 0.75rem;
+      font-family: var(--mono); font-size: 0.6rem; padding: 0.15rem 0.45rem;
+      border-radius: 3px; background: rgba(123,94,167,0.25); color: #b99ede;
+      border: 1px solid rgba(123,94,167,0.35); letter-spacing: 0.08em; z-index: 2;
+    }
+    .project-thumb {
+      width: 100%; aspect-ratio: 16/9; background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border-bottom: 1px solid var(--border);
+    }
+    .project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .project-card:hover .project-thumb img { transform: scale(1.04); }
+    .project-thumb-placeholder { font-family: var(--mono); font-size: 0.7rem; color: var(--border); letter-spacing: 0.08em; }
+    .project-card-body { padding: 1rem 1.25rem 1.25rem; }
+    .project-card-body h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.35; }
+    .project-card-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .ptag {
+      font-family: var(--mono); font-size: 0.65rem; padding: 0.2rem 0.5rem;
+      border-radius: 3px; background: var(--accent-dim); color: var(--accent);
+      border: 1px solid rgba(79,142,247,0.2);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(8,12,16,0.94); backdrop-filter: blur(8px);
+      overflow-y: auto; padding: 2rem 1rem;
+    }
+    .modal-overlay.open { display: flex; justify-content: center; }
+    .modal {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; width: 100%; max-width: 780px;
+      padding: 2.5rem; position: relative; margin: auto;
+    }
+    .modal-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 6px; color: var(--muted); font-size: 1rem;
+      width: 2rem; height: 2rem; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-eyebrow { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .modal h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+    .modal-divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+    .modal-screenshots { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin-bottom: 1.75rem; }
+    .modal-screenshot {
+      border-radius: 6px; overflow: hidden; border: 1px solid var(--border);
+      background: var(--surface2); aspect-ratio: 16/10;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-screenshot img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-section { margin-bottom: 1.5rem; }
+    .modal-label { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .modal-section p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
+    .modal-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .flow-steps { list-style: none; }
+    .flow-steps li {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+      padding: 0.35rem 0.75rem; background: var(--surface2); border-radius: 4px; margin-bottom: 2px;
+    }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .challenge-list li {
+      font-size: 0.82rem; padding: 0.7rem 1rem; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 6px; line-height: 1.65; color: var(--muted);
+    }
+    .challenge-list li .prob { color: #e07070; font-weight: 600; }
+    .challenge-list li .sol { color: #6ecb8a; font-weight: 600; }
+    .result-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .result-list li {
+      font-size: 0.82rem; color: var(--muted);
+      padding-left: 1.25rem; position: relative; line-height: 1.65;
+    }
+    .result-list li::before { content: 'v'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.1rem; }
+    .modal-tech-row {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .modal-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .flow-steps { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+    .flow-steps li {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      padding: 0.4rem 0.75rem;
+      background: var(--surface2);
+      border-radius: 4px;
+      position: relative;
+    }
+    .flow-steps li:not(:last-child)::after {
+      content: '↓';
+      display: block;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--border);
+      margin-top: 0.15rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    #contact .section-desc { margin-left: auto; margin-right: auto; }
+    .contact-box {
+      display: inline-flex; flex-direction: column; align-items: center; gap: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem 3rem;
+    }
+    .contact-cta {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      max-width: 400px;
+      line-height: 1.3;
+    }
+    .contact-email {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      padding: 0.6rem 1.2rem;
+      border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 6px;
+      background: var(--accent-dim);
+    }
+    .contact-email:hover { background: rgba(79,142,247,0.2); }
+    .contact-links { display: flex; gap: 1rem; }
+    .contact-link {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); }
+
+    /* ── BOOKING ── */
+    .booking-placeholder {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+      text-align: center;
+      max-width: 500px;
+    }
+    .booking-placeholder p { font-size: 0.875rem; color: var(--muted); }
+    .booking-placeholder strong { display: block; color: var(--text); font-size: 1rem; margin-bottom: 0.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 2.5rem;
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.78rem; color: var(--muted); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 2.5rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .modal-two-col { grid-template-columns: 1fr; }
+      .modal { padding: 1.5rem; }
+      footer { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.4rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">edqtorres</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-tag">Philippines (UTC+8)</p>
+  <h1>I build AI systems<br>that work <em>without you</em>.</h1>
+  <p class="hero-sub">
+    AI Automation Specialist with a background in production engineering and technical support. I design and deploy end-to-end automation pipelines: email-to-document, voice-to-reply, lead-to-CRM, on self-hosted infrastructure.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="https://github.com/Esmi30/n8n-workflows" target="_blank" rel="noopener" class="btn btn-outline">GitHub Workflows →</a>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <p class="section-eyebrow">Background</p>
+  <h2 class="section-title">About Me</h2>
+  <p class="section-desc">Production engineering background turned automation specialist. I build systems that run continuously, require no babysitting, and solve real operational problems.</p>
+  <div class="about-grid">
+    <div class="about-card">
+      <p class="about-card-label">Based in</p>
+      <h3>Laguna, Philippines</h3>
+      <p>Available for part-time remote work. Comfortable working across European and Southeast Asian business hours.</p>
+    </div>
+    <div class="about-card">
+      <p class="about-card-label">I specialize in</p>
+      <h3>End-to-end AI automation pipelines</h3>
+      <p>From the first inbound email or form submission to the final document, notification, or CRM entry — fully automated, zero manual steps.</p>
+    </div>
+    <div class="about-card">
+      <p class="about-card-label">Background</p>
+      <h3>Production Engineering &amp; Technical Support</h3>
+      <p>Hands-on experience with Linux server administration, Docker deployments, and self-hosted infrastructure for real business clients.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <p class="section-eyebrow">Technical Stack</p>
+  <h2 class="section-title">Core Skills</h2>
+  <p class="section-desc">Tools and platforms I use to build production-grade automation systems.</p>
+  <div class="skills-grid">
+
+    <div class="skill-block">
+      <div class="skill-block-header">
+        <div class="skill-block-icon">⚡</div>
+        <h3>Automation &amp; Workflow</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag"><img src="https://n8n.io/favicon.ico" onerror="this.style.display='none'" />n8n (self-hosted)</span>
+        <span class="skill-tag">Activepieces</span>
+        <span class="skill-tag">Zapier</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-block-header">
+        <div class="skill-block-icon">🔗</div>
+        <h3>APIs &amp; Integration</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Webhooks</span>
+        <span class="skill-tag">JSON</span>
+        <span class="skill-tag"><img src="https://www.anthropic.com/favicon.ico" onerror="this.style.display='none'" />Claude API</span>
+        <span class="skill-tag">OpenAI API</span>
+        <span class="skill-tag">MS Graph API</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-block-header">
+        <div class="skill-block-icon">🤖</div>
+        <h3>AI &amp; Voice</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Prompt Engineering</span>
+        <span class="skill-tag">Deepgram</span>
+        <span class="skill-tag">ElevenLabs</span>
+        <span class="skill-tag">faster-whisper</span>
+        <span class="skill-tag">MarianMT</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-block-header">
+        <div class="skill-block-icon">🗄️</div>
+        <h3>Databases &amp; Data</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">SQLite</span>
+        <span class="skill-tag">Airtable</span>
+        <span class="skill-tag">Google Sheets</span>
+        <span class="skill-tag">NocoDB</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-block-header">
+        <div class="skill-block-icon">🖥️</div>
+        <h3>Infrastructure &amp; DevOps</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Linux (Ubuntu)</span>
+        <span class="skill-tag">Docker Compose</span>
+        <span class="skill-tag">Cloudflare Tunnel</span>
+        <span class="skill-tag">Contabo VPS</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">SSH / Tailscale</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-block-header">
+        <div class="skill-block-icon">💻</div>
+        <h3>Scripting &amp; Development</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Google Apps Script</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Python FastAPI</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-block-header">
+        <div class="skill-block-icon">🔧</div>
+        <h3>No-Code / Low-Code</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Notion</span>
+        <span class="skill-tag">Airtable</span>
+        <span class="skill-tag">Google Workspace</span>
+        <span class="skill-tag">Jotform</span>
+        <span class="skill-tag">Tally</span>
+        <span class="skill-tag">ClickUp</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-block-header">
+        <div class="skill-block-icon">🌐</div>
+        <h3>Web &amp; Protocols</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Vercel</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">MCP Server</span>
+        <span class="skill-tag">OneDrive / SharePoint</span>
+        <span class="skill-tag">Telegram Bot API</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <p class="section-eyebrow">Portfolio</p>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-desc">Click any project to see the full case study — problem, solution, system design, and results.</p>
+  <div class="projects-grid" id="projectsGrid"></div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <p class="section-eyebrow">Get in touch</p>
+  <h2 class="section-title">Let's work together</h2>
+  <p class="section-desc">Have a repetitive process that needs automating? Let's talk about it.</p>
+  <div class="contact-box">
+    <p class="contact-cta">Ready to eliminate manual work from your workflow?</p>
+    <a href="mailto:edqtorres@gmail.com" class="contact-email">edqtorres@gmail.com</a>
+    <div class="contact-links">
+      <a href="https://github.com/Esmi30/n8n-workflows" target="_blank" class="contact-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- BOOKING -->
+<section class="section" id="booking">
+  <p class="section-eyebrow">Schedule a call</p>
+  <h2 class="section-title">Book a Free Discovery Call</h2>
+  <p class="section-desc">Currently available for part-time remote work at 3–4 hours/day. Let's find out if I'm the right fit.</p>
+  <div class="booking-placeholder">
+    <strong>📅 Booking coming soon</strong>
+    <p>Cal.com scheduling will be available here. In the meantime, reach out directly via email.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Edgardo Torres · Philippines</p>
+  <div class="footer-links">
+    <a href="https://github.com/Esmi30/n8n-workflows" target="_blank">GitHub</a>
+    <a href="mailto:edqtorres@gmail.com">Email</a>
+  </div>
+</footer>
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ── TICKER DATA ──
+const tickerItems = [
+  { name: 'n8n', icon: 'https://n8n.io/favicon.ico' },
+  { name: 'Docker', icon: 'https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png' },
+  { name: 'Linux', icon: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg' },
+  { name: 'PostgreSQL', icon: 'https://www.postgresql.org/favicon.ico' },
+  { name: 'Python', icon: 'https://www.python.org/favicon.ico' },
+  { name: 'Node.js', icon: 'https://nodejs.org/favicon.ico' },
+  { name: 'Claude API', icon: 'https://www.anthropic.com/favicon.ico' },
+  { name: 'OpenAI', icon: 'https://openai.com/favicon.ico' },
+  { name: 'Google Sheets', icon: 'https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico' },
+  { name: 'Airtable', icon: 'https://airtable.com/favicon.ico' },
+  { name: 'Telegram', icon: 'https://telegram.org/favicon.ico' },
+  { name: 'Cloudflare', icon: 'https://www.cloudflare.com/favicon.ico' },
+  { name: 'MS Graph API', icon: 'https://www.microsoft.com/favicon.ico' },
+  { name: 'Activepieces', icon: 'https://activepieces.com/favicon.ico' },
+  { name: 'Zapier', icon: 'https://zapier.com/favicon.ico' },
+  { name: 'GitHub', icon: 'https://github.com/favicon.ico' },
+  { name: 'Vercel', icon: 'https://vercel.com/favicon.ico' },
+  { name: 'Jotform', icon: 'https://www.jotform.com/favicon.ico' },
+  { name: 'Tally', icon: 'https://tally.so/favicon.ico' },
+  { name: 'ClickUp', icon: 'https://clickup.com/favicon.ico' },
+];
+
+function buildTicker() {
+  const track = document.getElementById('tickerTrack');
+  const doubled = [...tickerItems, ...tickerItems];
+  track.innerHTML = doubled.map(t => `
+    <span class="ticker-item">
+      <img src="${t.icon}" alt="" onerror="this.style.display='none'" />
+      ${t.name}
+    </span>
+  `).join('');
+}
+
+const projects = [
+  {
+    id: 'whatsapp',
+    title: 'WhatsApp Voice Automation System',
+    tags: ['Node.js', 'FastAPI', 'Docker', 'faster-whisper'],
+    nda: true,
+    screenshots: [],
+    overview: 'Automated WhatsApp bot that receives voice notes, transcribes them with AI, detects the language, translates, and replies. Zero manual steps. Runs on a Contabo VPS with 4 independent Docker microservices.',
+    problem: 'Client received frequent multilingual voice notes and had to manually listen and translate each one. Slow and unscalable.',
+    solution: 'Node.js handles WhatsApp events and access control. Python FastAPI microservices handle transcription, language detection, and translation independently. Migrated from ElevenLabs cloud STT to locally hosted faster-whisper to cut per-call costs to zero.',
+    flow: ['WhatsApp voice note received', 'Node.js: access control + routing', 'FastAPI: transcription (faster-whisper)', 'FastAPI: language detection', 'FastAPI: translation via MarianMT', 'Reply sent back via WhatsApp'],
+    tech: ['Node.js', 'Python FastAPI', 'Docker Compose', 'faster-whisper', 'MarianMT', 'Contabo VPS', 'Telegram (alerts)'],
+    challenges: [
+      { p: 'ElevenLabs API costs scaled too fast with volume', s: 'Replaced with locally hosted faster-whisper, zero per-transcription cost' },
+      { p: 'Unsupported language pairs in direct translation', s: 'Implemented pivot translation via English using MarianMT models' },
+      { p: 'WhatsApp session disconnecting silently', s: 'Added reconnect logic and Telegram alert on disconnect' },
+    ],
+    results: ['24/7 on self-hosted VPS, zero manual intervention', 'Eliminated recurring cloud STT costs', 'Rate limiting and whitelist prevent abuse', 'Admin panel for user management and live job monitoring']
+  },
+  {
+    id: 'salesfunnel',
+    title: 'AI Sales Funnel Automation',
+    tags: ['n8n', 'Claude API', 'MS Graph API', 'OneDrive'],
+    nda: true,
+    screenshots: [],
+    overview: 'Polls Outlook every 10 minutes, classifies emails with Claude AI, creates numbered OneDrive folders, generates pre-filled Word quotes via an AI agent, logs leads to a CRM Excel table, and notifies the sales team via Discord.',
+    problem: 'Team was manually checking emails, routing them, creating folders, logging leads, and generating quotes from scratch. Multi-step, error-prone, and slow.',
+    solution: 'n8n on self-hosted infrastructure. Claude Haiku handles classification at near-zero cost. AI agent generates Word quotes only when needed. Microsoft Graph API replaces all native n8n Microsoft nodes that had license issues.',
+    flow: ['Outlook polled every 10 min', 'Claude Haiku: classify email', 'Extract client data', 'Create OneDrive folder via Graph API', 'AI agent generates Word quote', 'Log lead to CRM Excel', 'Discord notification to reviewer'],
+    tech: ['n8n', 'Claude Haiku', 'Claude Sonnet', 'Microsoft Graph API', 'OneDrive', 'PostgreSQL', 'Discord Webhook'],
+    challenges: [
+      { p: 'Native n8n MS nodes failing with license errors', s: 'Replaced with HTTP + Microsoft Graph API via OAuth2' },
+      { p: 'AI costs spiked to $70/day from token overhead', s: 'Switched classification to Claude Haiku (~$0.25/day), reserved Sonnet for document generation only' },
+      { p: 'Outlook node silently dropping emails', s: 'Fixed by switching to filtersUI structure with correct message parameter' },
+    ],
+    results: ['Email to reviewer notification in under 2 minutes', 'Consistent quote numbering, zero human error', 'CRM auto-populated on every qualified lead', 'No per-workflow cloud subscription cost']
+  },
+  {
+    id: 'cookie',
+    title: 'Automated Cookie Order System',
+    tags: ['Google Apps Script', 'n8n', 'Google Sheets', 'Telegram'],
+    nda: false,
+    screenshots: [],
+    overview: 'Complete order management system for a local cookie business. Multi-page form logs orders to Google Sheets, calculates totals, sends instant Telegram notifications, and delivers weekly and monthly sales reports automatically.',
+    problem: 'Orders were managed manually through chat. Tracking, computing totals, and following up required constant effort with room for missed orders.',
+    solution: 'Multi-page form built with Google Apps Script connected to Google Sheets. n8n watches for new rows and triggers Telegram notifications. Separate scheduled workflows send weekly and monthly sales summaries.',
+    flow: ['Customer fills multi-page order form', 'Apps Script: compute total + save to Sheets', 'n8n Sheets trigger fires', 'Telegram notification to owner', 'Scheduled: weekly and monthly report via email'],
+    tech: ['Google Apps Script', 'Google Sheets', 'Google Drive', 'n8n', 'HTML/CSS/JS', 'Telegram Bot API'],
+    challenges: [
+      { p: 'Drive images not loading on other browsers', s: 'Set Drive folders to public access' },
+      { p: 'Webhook URL expiring with Cloudflare tunnel', s: 'Switched n8n trigger to Google Sheets trigger, removing dependency on a temporary URL' },
+      { p: 'Order Again button disabled after submit', s: 'Added reset function to restore form state without page refresh' },
+    ],
+    results: ['Zero missed orders since deployment', 'Every order auto-logged with timestamp and payment details', 'Instant Telegram alert on every new order', 'Weekly and monthly sales reports sent automatically']
+  },
+  {
+    id: 'appointment',
+    title: 'Automated Appointment Booking System',
+    tags: ['n8n', 'Jotform', 'Airtable', 'Telegram', 'Email'],
+    nda: false,
+    screenshots: [],
+    overview: 'Jotform submission generates a unique Booking ID, stores the record in Airtable, sends an admin Telegram alert, emails the customer a confirmation, and runs a daily reminder workflow that prevents duplicate sends.',
+    problem: 'Appointments managed manually through forms and spreadsheets. No reminder process. Bookings had to be checked manually before each date.',
+    solution: 'Jotform connects to n8n via webhook. JavaScript transforms data and generates the Booking ID. A second scheduled workflow queries upcoming appointments, sends reminders, and flips the reminder status field to prevent resends.',
+    flow: ['Customer fills Jotform', 'n8n webhook: data transform + Booking ID', 'Airtable: create record', 'Telegram: admin alert', 'Email: customer confirmation', 'Daily: reminder check and status update'],
+    tech: ['n8n', 'Jotform', 'Airtable', 'Telegram Bot API', 'Email', 'JavaScript', 'Cron'],
+    challenges: [
+      { p: 'Jotform date/time values hard to compare in automation logic', s: 'Converted to clean formats using JavaScript inside n8n' },
+      { p: 'Airtable output nested, fields inaccessible in later nodes', s: 'Reworked workflow to process each record individually' },
+      { p: 'Reminder records not updating correctly', s: 'Switched to Booking ID matching to update Reminder Status reliably' },
+    ],
+    results: ['Full booking and reminder automation in production', 'Instant Telegram alerts and customer email confirmations', 'Next-day automated reminders', 'Duplicate reminders prevented via status flag']
+  },
+  {
+    id: 'server',
+    title: 'Self-Hosted Automation Server',
+    tags: ['Docker', 'Linux', 'n8n', 'Orange Pi Zero 3', 'Cloudflare'],
+    nda: false,
+    screenshots: [],
+    overview: 'n8n running 24/7 in Docker on an Orange Pi Zero 3 with 1.5GB RAM. Persistent storage keeps workflows running through restarts. Exposed publicly via Cloudflare Tunnel at zero subscription cost.',
+    problem: 'Cloud automation platforms require paid plans. Free tiers are restrictive and unstable. Needed full control over data and uptime.',
+    solution: 'Deployed n8n in a Docker container on Ubuntu-based Orange Pi Zero 3. Mounted persistent volume for configuration. Set up Cloudflare Tunnel for a stable public URL without port forwarding.',
+    flow: ['Browser connects via Cloudflare Tunnel', 'n8n Web Interface', 'Docker container', 'Linux on Orange Pi Zero 3', 'Persistent volume storage'],
+    tech: ['Linux (Ubuntu)', 'Docker', 'n8n', 'Cloudflare Tunnel', 'Orange Pi Zero 3'],
+    challenges: [
+      { p: 'Permission error writing to /home/node/.n8n/config', s: 'Fixed folder permissions on the mounted volume. Deepened understanding of Docker volume ownership.' },
+    ],
+    results: ['Self-hosted automation server running 24/7', 'Full control over data and workflows', 'Runs on 1.5GB RAM low-power hardware', 'Zero subscription cost']
+  },
+  {
+    id: 'leadcapture',
+    title: 'Lead Capture System',
+    tags: ['n8n', 'Tally', 'Google Sheets', 'ClickUp', 'Telegram'],
+    nda: false,
+    screenshots: [],
+    overview: 'Tally form submission instantly saves lead data to Google Sheets, creates a follow-up task in ClickUp, and notifies the business owner via Telegram. Entire process runs in seconds with no human involvement.',
+    problem: 'Small businesses lose leads because they cannot respond fast enough. Copying form data to a spreadsheet, creating tasks, and notifying the right person manually takes too long.',
+    solution: 'n8n webhook listens for Tally form submissions. Data flows to Google Sheets via OAuth2, ClickUp via API Key, and Telegram via Bot API. Runs on self-hosted n8n with no cloud plan required.',
+    flow: ['Tally form submitted', 'n8n webhook trigger', 'Save to Google Sheets (OAuth2)', 'Create ClickUp task (API Key)', 'Telegram notification (Bot API)'],
+    tech: ['n8n', 'Tally', 'Google Sheets', 'ClickUp', 'Telegram Bot API'],
+    challenges: [
+      { p: 'Tally webhook not receiving data, URL pointing to wrong environment', s: 'Used test URL during development, switched to production URL on activation' },
+      { p: 'ClickUp fields returning undefined due to incorrect node reference', s: 'Used full node reference expression pointing explicitly to the Tally trigger data' },
+    ],
+    results: ['Zero manual work in managing leads', 'Every inquiry captured instantly on form submission', 'Telegram notification within seconds', 'Follow-up task auto-created in ClickUp for every lead']
+  },
+];
+
+function buildProjectCards() {
+  const grid = document.getElementById('projectsGrid');
+  grid.innerHTML = projects.map(p => `
+    <div class="project-card" onclick="openModal('${p.id}')">
+      ${p.nda ? '<span class="project-nda">NDA</span>' : ''}
+      <div class="project-thumb">
+        ${p.screenshots[0]
+          ? `<img src="${p.screenshots[0]}" alt="${p.title}" />`
+          : `<span class="project-thumb-placeholder">screenshot coming soon</span>`}
+      </div>
+      <div class="project-card-body">
+        <h3>${p.title}</h3>
+        <div class="project-card-tags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openModal(id) {
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+
+  const screenshotsHtml = p.screenshots.length
+    ? `<div class="modal-screenshots">${p.screenshots.map(s => `<div class="modal-screenshot"><img src="${s}" alt="" /></div>`).join('')}</div>`
+    : '';
+
+  document.getElementById('modalBody').innerHTML = `
+    <p class="modal-eyebrow">Case Study</p>
+    <h2>${p.title}</h2>
+    <hr class="modal-divider" />
+    ${screenshotsHtml}
+    <div class="modal-section">
+      <p class="modal-label">Overview</p>
+      <p>${p.overview}</p>
+    </div>
+    <div class="modal-section">
+      <p class="modal-label">Problem</p>
+      <p>${p.problem}</p>
+    </div>
+    <div class="modal-section">
+      <p class="modal-label">Solution</p>
+      <p>${p.solution}</p>
+    </div>
+    <div class="modal-section">
+      <div class="modal-two-col">
+        <div>
+          <p class="modal-label">System Flow</p>
+          <ul class="flow-steps">${p.flow.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <p class="modal-label">Technologies</p>
+          <div class="tech-row">${p.tech.map(t => `<span class="ptag">${t}</span>`).join('')}</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-section">
+      <p class="modal-label">Challenges</p>
+      <ul class="challenge-list">
+        ${p.challenges.map(c => `<li><span class="prob">Problem:</span> ${c.p}<br><span class="sol">Solution:</span> ${c.s}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="modal-section">
+      <p class="modal-label">Results</p>
+      <ul class="result-list">${p.results.map(r => `<li>${r}</li>`).join('')}</ul>
+    </div>
+  `;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+buildTicker();
+buildProjectCards();
+</script>
+</body>
+</html>
