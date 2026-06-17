@@ -770,7 +770,7 @@ const projects = [
     title: 'WhatsApp Voice Automation System',
     tags: ['Node.js', 'FastAPI', 'Docker', 'faster-whisper'],
     nda: true,
-    screenshots: [],
+    screenshots: ['images/WhatsApp Voice Automation System.png'],
     overview: 'Automated WhatsApp bot that receives voice notes, transcribes them with AI, detects the language, translates, and replies. Zero manual steps. Runs on a Contabo VPS with 4 independent Docker microservices.',
     problem: 'Client received frequent multilingual voice notes and had to manually listen and translate each one. Slow and unscalable.',
     solution: 'Node.js handles WhatsApp events and access control. Python FastAPI microservices handle transcription, language detection, and translation independently. Migrated from ElevenLabs cloud STT to locally hosted faster-whisper to cut per-call costs to zero.',
@@ -788,7 +788,7 @@ const projects = [
     title: 'AI Sales Funnel Automation',
     tags: ['n8n', 'Claude API', 'MS Graph API', 'OneDrive'],
     nda: true,
-    screenshots: [],
+    screenshots: ['images/AI Sales Funnel Automation.png'],
     overview: 'Polls Outlook every 10 minutes, classifies emails with Claude AI, creates numbered OneDrive folders, generates pre-filled Word quotes via an AI agent, logs leads to a CRM Excel table, and notifies the sales team via Discord.',
     problem: 'Team was manually checking emails, routing them, creating folders, logging leads, and generating quotes from scratch. Multi-step, error-prone, and slow.',
     solution: 'n8n on self-hosted infrastructure. Claude Haiku handles classification at near-zero cost. AI agent generates Word quotes only when needed. Microsoft Graph API replaces all native n8n Microsoft nodes that had license issues.',
@@ -806,7 +806,7 @@ const projects = [
     title: 'Automated Cookie Order System',
     tags: ['Google Apps Script', 'n8n', 'Google Sheets', 'Telegram'],
     nda: false,
-    screenshots: [],
+    screenshots: ['images/Automated Cookie Order System.png'],
     overview: 'Complete order management system for a local cookie business. Multi-page form logs orders to Google Sheets, calculates totals, sends instant Telegram notifications, and delivers weekly and monthly sales reports automatically.',
     problem: 'Orders were managed manually through chat. Tracking, computing totals, and following up required constant effort with room for missed orders.',
     solution: 'Multi-page form built with Google Apps Script connected to Google Sheets. n8n watches for new rows and triggers Telegram notifications. Separate scheduled workflows send weekly and monthly sales summaries.',
@@ -824,7 +824,7 @@ const projects = [
     title: 'Automated Appointment Booking System',
     tags: ['n8n', 'Jotform', 'Airtable', 'Telegram', 'Email'],
     nda: false,
-    screenshots: [],
+    screenshots: ['images/Automated Appointment Booking System.png'],
     overview: 'Jotform submission generates a unique Booking ID, stores the record in Airtable, sends an admin Telegram alert, emails the customer a confirmation, and runs a daily reminder workflow that prevents duplicate sends.',
     problem: 'Appointments managed manually through forms and spreadsheets. No reminder process. Bookings had to be checked manually before each date.',
     solution: 'Jotform connects to n8n via webhook. JavaScript transforms data and generates the Booking ID. A second scheduled workflow queries upcoming appointments, sends reminders, and flips the reminder status field to prevent resends.',
@@ -842,7 +842,7 @@ const projects = [
     title: 'Self-Hosted Automation Server',
     tags: ['Docker', 'Linux', 'n8n', 'Orange Pi Zero 3', 'Cloudflare'],
     nda: false,
-    screenshots: [],
+    screenshots: ['images/Self hosted n8n server.png'],
     overview: 'n8n running 24/7 in Docker on an Orange Pi Zero 3 with 1.5GB RAM. Persistent storage keeps workflows running through restarts. Exposed publicly via Cloudflare Tunnel at zero subscription cost.',
     problem: 'Cloud automation platforms require paid plans. Free tiers are restrictive and unstable. Needed full control over data and uptime.',
     solution: 'Deployed n8n in a Docker container on Ubuntu-based Orange Pi Zero 3. Mounted persistent volume for configuration. Set up Cloudflare Tunnel for a stable public URL without port forwarding.',
@@ -858,7 +858,7 @@ const projects = [
     title: 'Lead Capture System',
     tags: ['n8n', 'Tally', 'Google Sheets', 'ClickUp', 'Telegram'],
     nda: false,
-    screenshots: [],
+    screenshots: ['images/Lead capture system.png'],
     overview: 'Tally form submission instantly saves lead data to Google Sheets, creates a follow-up task in ClickUp, and notifies the business owner via Telegram. Entire process runs in seconds with no human involvement.',
     problem: 'Small businesses lose leads because they cannot respond fast enough. Copying form data to a spreadsheet, creating tasks, and notifying the right person manually takes too long.',
     solution: 'n8n webhook listens for Tally form submissions. Data flows to Google Sheets via OAuth2, ClickUp via API Key, and Telegram via Bot API. Runs on self-hosted n8n with no cloud plan required.',
@@ -875,7 +875,7 @@ const projects = [
 function buildProjectCards() {
   const grid = document.getElementById('projectsGrid');
   grid.innerHTML = projects.map(p => `
-    <div class="project-card" onclick="openModal('${p.id}')">
+    <div class="project-card" data-id="${p.id}">
       ${p.nda ? '<span class="project-nda">NDA</span>' : ''}
       <div class="project-thumb">
         ${p.screenshots[0]
@@ -959,22 +959,32 @@ document.addEventListener('keydown', function(e) {
 buildTicker();
 buildProjectCards();
 
-// drag to scroll carousel
+// drag to scroll carousel (won't block clicks)
 const carousel = document.getElementById('projectsGrid');
-let isDown = false, startX, scrollLeft;
+let isDragging = false, startX, scrollLeft, dragDistance;
 carousel.addEventListener('mousedown', e => {
-  isDown = true;
+  isDragging = true;
+  dragDistance = 0;
   startX = e.pageX - carousel.offsetLeft;
   scrollLeft = carousel.scrollLeft;
+  carousel.style.cursor = 'grabbing';
 });
-carousel.addEventListener('mouseleave', () => isDown = false);
-carousel.addEventListener('mouseup', () => isDown = false);
+carousel.addEventListener('mouseleave', () => { isDragging = false; carousel.style.cursor = 'grab'; });
+carousel.addEventListener('mouseup', () => { isDragging = false; carousel.style.cursor = 'grab'; });
 carousel.addEventListener('mousemove', e => {
-  if (!isDown) return;
+  if (!isDragging) return;
   e.preventDefault();
   const x = e.pageX - carousel.offsetLeft;
-  carousel.scrollLeft = scrollLeft - (x - startX);
+  const walk = x - startX;
+  dragDistance = Math.abs(walk);
+  carousel.scrollLeft = scrollLeft - walk;
 });
+// only open modal if it was a click, not a drag
+carousel.addEventListener('click', e => {
+  if (dragDistance > 5) return;
+  const card = e.target.closest('.project-card');
+  if (card) openModal(card.dataset.id);
+}, true);
 </script>
 </body>
 </html>
