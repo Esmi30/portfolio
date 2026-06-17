@@ -54,7 +54,7 @@
     }
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a {
-      font-size: 0.8rem;
+      font-size: 0.95rem;
       font-weight: 500;
       color: var(--muted);
       letter-spacing: 0.04em;
@@ -179,7 +179,7 @@
       color: var(--muted);
       max-width: 500px;
       margin-bottom: 3rem;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       line-height: 1.75;
     }
 
@@ -198,20 +198,20 @@
     }
     .about-card-label {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       color: var(--accent);
       letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 0.75rem;
     }
     .about-card h3 {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 700;
       line-height: 1.4;
       margin-bottom: 0.5rem;
     }
     .about-card p {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       color: var(--muted);
       line-height: 1.7;
     }
@@ -307,11 +307,11 @@
       display: flex; align-items: center; justify-content: center;
       overflow: hidden; border-bottom: 1px solid var(--border);
     }
-    .project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .project-thumb img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; background: var(--surface2); }
     .project-card:hover .project-thumb img { transform: scale(1.04); }
     .project-thumb-placeholder { font-family: var(--mono); font-size: 0.7rem; color: var(--border); letter-spacing: 0.08em; }
     .project-card-body { padding: 1rem 1.25rem 1.25rem; }
-    .project-card-body h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.35; }
+    .project-card-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .project-card-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
     .ptag {
       font-family: var(--mono); font-size: 0.65rem; padding: 0.2rem 0.5rem;
@@ -351,7 +351,7 @@
     .modal-screenshot img { width: 100%; height: 100%; object-fit: cover; }
     .modal-section { margin-bottom: 1.5rem; }
     .modal-label { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .modal-section p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
+    .modal-section p { font-size: 1rem; color: var(--muted); line-height: 1.75; }
     .modal-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .flow-steps { list-style: none; }
     .flow-steps li {
