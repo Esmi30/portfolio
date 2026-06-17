@@ -219,15 +219,15 @@
     /* ── SKILLS ── */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
     }
     .skill-block { background: var(--surface); padding: 1.75rem; }
-    .skills-grid .skill-block:nth-child(7) { grid-column: 1 / 2; }
-    .skills-grid .skill-block:nth-child(8) { grid-column: 2 / 4; }
+    .skills-grid .skill-block:nth-child(7) { grid-column: unset; }
+    .skills-grid .skill-block:nth-child(8) { grid-column: unset; }
     .skill-block-header {
       display: flex; align-items: center; gap: 0.75rem;
       margin-bottom: 1rem;
@@ -262,15 +262,13 @@
     /* PROJECT CAROUSEL */
     .projects-carousel-wrap {
       position: relative;
-      margin: 0 -2.5rem;
-      padding: 0;
       overflow: hidden;
     }
     .projects-carousel {
       display: flex;
       gap: 1rem;
       overflow: hidden;
-      padding: 1rem 2.5rem 1.5rem;
+      padding: 1rem 0 1.5rem;
       cursor: grab;
       user-select: none;
     }
