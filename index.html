@@ -30,7 +30,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -79,12 +79,8 @@
       margin-bottom: 1.75rem;
       display: flex; align-items: center; gap: 0.75rem;
     }
-    .hero-tag::before {
-      content: '';
-      width: 2.5rem; height: 1px;
-      background: var(--accent);
-      display: block;
-    }
+    .hero-tag::before { display: none; }
+
     .hero h1 {
       font-size: clamp(2.8rem, 6vw, 5rem);
       font-weight: 800;
@@ -273,18 +269,23 @@
     .projects-carousel {
       display: flex;
       gap: 1rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+      overflow: hidden;
       padding-bottom: 1rem;
       cursor: grab;
+      user-select: none;
     }
-    .projects-carousel:active { cursor: grabbing; }
-    .projects-carousel::-webkit-scrollbar { height: 4px; }
-    .projects-carousel::-webkit-scrollbar-track { background: var(--surface); border-radius: 2px; }
-    .projects-carousel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-    .projects-carousel::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-    .project-card {
+    .projects-carousel.dragging { cursor: grabbing; }
+    .projects-carousel-inner {
+      display: flex;
+      gap: 1rem;
+      animation: carousel-scroll 30s linear infinite;
+      flex-shrink: 0;
+    }
+    .projects-carousel:hover .projects-carousel-inner { animation-play-state: paused; }
+    @keyframes carousel-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -293,7 +294,6 @@
       transition: border-color 0.2s, transform 0.2s;
       position: relative;
       flex: 0 0 300px;
-      scroll-snap-align: start;
     }
     .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
     .project-nda {
@@ -501,10 +501,10 @@
 
 <!-- HERO -->
 <div class="hero">
-  <p class="hero-tag">Philippines (UTC+8)</p>
+  <p class="hero-tag">Tech VA and AI Automation Specialist · Philippines (UTC+8)</p>
   <h1>I build AI systems<br>that work <em>without you</em>.</h1>
   <p class="hero-sub">
-    AI Automation Specialist with a background in production engineering and technical support. I design and deploy end-to-end automation pipelines: email-to-document, voice-to-reply, lead-to-CRM, on self-hosted infrastructure.
+    Tech VA and AI Automation Specialist with a background in production engineering and technical support. I design and deploy end-to-end automation pipelines: email-to-document, voice-to-reply, lead-to-CRM, on self-hosted infrastructure.
   </p>
   <div class="hero-cta">
     <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -535,8 +535,8 @@
     </div>
     <div class="about-card">
       <p class="about-card-label">Background</p>
-      <h3>Production Engineering &amp; Technical Support</h3>
-      <p>Hands-on experience with Linux server administration, Docker deployments, and self-hosted infrastructure for real business clients.</p>
+      <h3>Tech VA and Production Engineering</h3>
+      <p>Hands-on technical virtual assistant with experience in Linux server administration, Docker deployments, and self-hosted infrastructure for real business clients.</p>
     </div>
   </div>
 </section>
@@ -873,8 +873,8 @@ const projects = [
 ];
 
 function buildProjectCards() {
-  const grid = document.getElementById('projectsGrid');
-  grid.innerHTML = projects.map(p => `
+  const carousel = document.getElementById('projectsGrid');
+  const cardHtml = projects.map(p => `
     <div class="project-card" data-id="${p.id}">
       ${p.nda ? '<span class="project-nda">NDA</span>' : ''}
       <div class="project-thumb">
@@ -888,6 +888,11 @@ function buildProjectCards() {
       </div>
     </div>
   `).join('');
+  // duplicate for seamless loop
+  carousel.innerHTML = `
+    <div class="projects-carousel-inner">${cardHtml}</div>
+    <div class="projects-carousel-inner" aria-hidden="true">${cardHtml}</div>
+  `;
 }
 
 function openModal(id) {
@@ -959,32 +964,21 @@ document.addEventListener('keydown', function(e) {
 buildTicker();
 buildProjectCards();
 
-// drag to scroll carousel (won't block clicks)
-const carousel = document.getElementById('projectsGrid');
-let isDragging = false, startX, scrollLeft, dragDistance;
-carousel.addEventListener('mousedown', e => {
-  isDragging = true;
-  dragDistance = 0;
-  startX = e.pageX - carousel.offsetLeft;
-  scrollLeft = carousel.scrollLeft;
-  carousel.style.cursor = 'grabbing';
-});
-carousel.addEventListener('mouseleave', () => { isDragging = false; carousel.style.cursor = 'grab'; });
-carousel.addEventListener('mouseup', () => { isDragging = false; carousel.style.cursor = 'grab'; });
-carousel.addEventListener('mousemove', e => {
-  if (!isDragging) return;
-  e.preventDefault();
-  const x = e.pageX - carousel.offsetLeft;
-  const walk = x - startX;
-  dragDistance = Math.abs(walk);
-  carousel.scrollLeft = scrollLeft - walk;
-});
-// only open modal if it was a click, not a drag
-carousel.addEventListener('click', e => {
-  if (dragDistance > 5) return;
+// click to open modal
+document.getElementById('projectsGrid').addEventListener('click', e => {
   const card = e.target.closest('.project-card');
   if (card) openModal(card.dataset.id);
-}, true);
+});
+
+// pause on hover already handled by CSS
+// touch support
+const carousel = document.getElementById('projectsGrid');
+let touchStartX = 0;
+carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+carousel.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  // touch scroll is natural on mobile, just ensure click still works
+});
 </script>
 </body>
 </html>
