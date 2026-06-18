@@ -152,7 +152,8 @@
       flex-shrink: 0;
       border-right: 1px solid var(--border);
     }
-    .ticker-item img { width: 16px; height: 16px; object-fit: contain; filter: invert(1) opacity(0.7); }
+    .ticker-item img { width: 16px; height: 16px; object-fit: contain; }
+    .ticker-item img.invert { filter: invert(1) opacity(0.8); }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ── SECTIONS ── */
@@ -730,14 +731,14 @@
 <script>
 // ── TICKER DATA ──
 const tickerItems = [
-  { name: 'n8n', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/n8n.svg' },
+  { name: 'n8n', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/n8n.svg', invert: true },
   { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/docker.svg' },
-  { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linux.svg' },
+  { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linux.svg', invert: true },
   { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/postgresql.svg' },
   { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/python.svg' },
   { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nodedotjs.svg' },
   { name: 'Claude API', icon: 'https://www.anthropic.com/favicon.ico' },
-  { name: 'OpenAI', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg' },
+  { name: 'OpenAI', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg', invert: true },
   { name: 'Google Sheets', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlesheets.svg' },
   { name: 'Airtable', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airtable.svg' },
   { name: 'Telegram', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg' },
@@ -745,8 +746,8 @@ const tickerItems = [
   { name: 'Microsoft', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoft.svg' },
   { name: 'Activepieces', icon: 'https://activepieces.com/favicon.ico' },
   { name: 'Zapier', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/zapier.svg' },
-  { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg' },
-  { name: 'Vercel', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vercel.svg' },
+  { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg', invert: true },
+  { name: 'Vercel', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vercel.svg', invert: true },
   { name: 'Jotform', icon: 'https://www.jotform.com/favicon.ico' },
   { name: 'Tally', icon: 'https://tally.so/favicon.ico' },
   { name: 'ClickUp', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/clickup.svg' },
@@ -757,7 +758,7 @@ function buildTicker() {
   const doubled = [...tickerItems, ...tickerItems];
   track.innerHTML = doubled.map(t => `
     <span class="ticker-item">
-      <img src="${t.icon}" alt="" onerror="this.style.display='none'" />
+      <img src="${t.icon}" alt="" class="${t.invert ? 'invert' : ''}" onerror="this.style.display='none'" />
       ${t.name}
     </span>
   `).join('');
