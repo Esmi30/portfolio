@@ -279,13 +279,14 @@
       display: flex;
       gap: 1rem;
       padding-left: 1rem;
-      animation: carousel-scroll 30s linear infinite;
       flex-shrink: 0;
+      width: max-content;
+      animation: carousel-scroll 30s linear infinite;
     }
     .projects-carousel:hover .projects-carousel-inner { animation-play-state: paused; }
     @keyframes carousel-scroll {
       from { transform: translateX(0); }
-      to { transform: translateX(calc(-100% - 1rem)); }
+      to { transform: translateX(-50%); }
     }
       background: var(--surface);
       border: 1px solid var(--border);
@@ -740,10 +741,10 @@ const tickerItems = [
   { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
   { name: 'Claude API', icon: 'https://www.anthropic.com/favicon.ico' },
   { name: 'OpenAI', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg', invert: true },
-  { name: 'Google Sheets', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg' },
-  { name: 'Airtable', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airtable.svg', invert: true },
-  { name: 'Telegram', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/telegram/telegram-original.svg' },
-  { name: 'Cloudflare', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/cloudflare.svg', invert: true },
+  { name: 'Google Sheets', icon: 'https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico' },
+  { name: 'Airtable', icon: 'https://airtable.com/favicon.ico' },
+  { name: 'Telegram', icon: 'https://telegram.org/favicon.ico' },
+  { name: 'Cloudflare', icon: 'https://www.cloudflare.com/favicon.ico' },
   { name: 'Microsoft', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg' },
   { name: 'Activepieces', icon: 'https://activepieces.com/favicon.ico' },
   { name: 'Zapier', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/zapier.svg', invert: true },
@@ -889,11 +890,7 @@ function buildProjectCards() {
       </div>
     </div>
   `).join('');
-  // duplicate for seamless loop
-  carousel.innerHTML = `
-    <div class="projects-carousel-inner">${cardHtml}</div>
-    <div class="projects-carousel-inner" aria-hidden="true">${cardHtml}</div>
-  `;
+  carousel.innerHTML = `<div class="projects-carousel-inner">${cardHtml}${cardHtml}</div>`;
 }
 
 function openModal(id) {
