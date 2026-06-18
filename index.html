@@ -258,7 +258,8 @@
       border: 1px solid var(--border);
       display: inline-flex; align-items: center; gap: 0.3rem;
     }
-    .skill-tag img { width: 12px; height: 12px; object-fit: contain; filter: invert(1) opacity(0.8); }
+    .skill-tag img { width: 12px; height: 12px; object-fit: contain; }
+    .skill-tag img.invert { filter: invert(1) opacity(0.8); }
 
     /* PROJECT CAROUSEL */
     .projects-carousel-wrap {
@@ -612,7 +613,7 @@
       </div>
       <div class="skill-tags">
         <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linux.svg" />Linux (Ubuntu)</span>
-        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/docker.svg" />Docker Compose</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />Docker Compose</span>
         <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/cloudflare.svg" />Cloudflare Tunnel</span>
         <span class="skill-tag">Contabo VPS</span>
         <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftazure.svg" />Azure</span>
@@ -732,25 +733,25 @@
 // ── TICKER DATA ──
 const tickerItems = [
   { name: 'n8n', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/n8n.svg', invert: true },
-  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/docker.svg' },
-  { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linux.svg', invert: true },
-  { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/postgresql.svg' },
-  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/python.svg' },
-  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nodedotjs.svg' },
+  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+  { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
+  { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
   { name: 'Claude API', icon: 'https://www.anthropic.com/favicon.ico' },
   { name: 'OpenAI', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg', invert: true },
-  { name: 'Google Sheets', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlesheets.svg' },
-  { name: 'Airtable', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airtable.svg' },
-  { name: 'Telegram', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg' },
-  { name: 'Cloudflare', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/cloudflare.svg' },
-  { name: 'Microsoft', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoft.svg' },
+  { name: 'Google Sheets', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg' },
+  { name: 'Airtable', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airtable.svg', invert: false },
+  { name: 'Telegram', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg', invert: false },
+  { name: 'Cloudflare', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/cloudflare.svg', invert: false },
+  { name: 'Microsoft', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg' },
   { name: 'Activepieces', icon: 'https://activepieces.com/favicon.ico' },
-  { name: 'Zapier', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/zapier.svg' },
-  { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg', invert: true },
+  { name: 'Zapier', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/zapier.svg', invert: false },
+  { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', invert: true },
   { name: 'Vercel', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vercel.svg', invert: true },
   { name: 'Jotform', icon: 'https://www.jotform.com/favicon.ico' },
   { name: 'Tally', icon: 'https://tally.so/favicon.ico' },
-  { name: 'ClickUp', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/clickup.svg' },
+  { name: 'ClickUp', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/clickup.svg', invert: false },
 ];
 
 function buildTicker() {
