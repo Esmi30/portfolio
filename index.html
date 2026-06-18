@@ -267,21 +267,14 @@
       overflow: hidden;
     }
     .projects-carousel {
-      display: flex;
-      gap: 0;
       overflow: hidden;
       padding: 1rem 0 1.5rem;
-      cursor: grab;
-      user-select: none;
     }
-    .projects-carousel.dragging { cursor: grabbing; }
     .projects-carousel-inner {
       display: flex;
       gap: 1rem;
-      padding-left: 1rem;
-      flex-shrink: 0;
       width: max-content;
-      animation: carousel-scroll 30s linear infinite;
+      animation: carousel-scroll 25s linear infinite;
     }
     .projects-carousel:hover .projects-carousel-inner { animation-play-state: paused; }
     @keyframes carousel-scroll {
@@ -890,7 +883,7 @@ function buildProjectCards() {
       </div>
     </div>
   `).join('');
-  carousel.innerHTML = `<div class="projects-carousel-inner">${cardHtml}${cardHtml}</div>`;
+  carousel.innerHTML = `<div class="projects-carousel-inner">${cardHtml}<div style="width:1rem;flex-shrink:0"></div>${cardHtml}</div>`;
 }
 
 function openModal(id) {
