@@ -226,6 +226,8 @@
       overflow: hidden;
     }
     .skill-block { background: var(--surface); padding: 1.75rem; }
+    .skills-grid .skill-block:nth-child(7) { grid-column: unset; }
+    .skills-grid .skill-block:nth-child(8) { grid-column: unset; }
     .skill-block-header {
       display: flex; align-items: center; gap: 0.75rem;
       margin-bottom: 1rem;
@@ -255,7 +257,7 @@
       border: 1px solid var(--border);
       display: inline-flex; align-items: center; gap: 0.3rem;
     }
-    .skill-tag img { width: 12px; height: 12px; object-fit: contain; }
+    .skill-tag img { width: 12px; height: 12px; object-fit: contain; filter: invert(1) opacity(0.8); }
 
     /* PROJECT CAROUSEL */
     .projects-carousel-wrap {
@@ -283,7 +285,6 @@
       from { transform: translateX(0); }
       to { transform: translateX(calc(-100% - 1rem)); }
     }
-    .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -351,6 +352,33 @@
     .modal-label { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
     .modal-section p { font-size: 1.05rem; color: var(--muted); line-height: 1.75; }
     .modal-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .flow-steps { list-style: none; }
+    .flow-steps li {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+      padding: 0.35rem 0.75rem; background: var(--surface2); border-radius: 4px; margin-bottom: 2px;
+    }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .challenge-list li {
+      font-size: 0.82rem; padding: 0.7rem 1rem; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 6px; line-height: 1.65; color: var(--muted);
+    }
+    .challenge-list li .prob { color: #e07070; font-weight: 600; }
+    .challenge-list li .sol { color: #6ecb8a; font-weight: 600; }
+    .result-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .result-list li {
+      font-size: 0.82rem; color: var(--muted);
+      padding-left: 1.25rem; position: relative; line-height: 1.65;
+    }
+    .result-list li::before { content: 'v'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.1rem; }
+    .modal-tech-row {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .modal-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
     .flow-steps { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
     .flow-steps li {
       font-family: var(--mono);
@@ -369,20 +397,6 @@
       color: var(--border);
       margin-top: 0.15rem;
     }
-    .tech-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .challenge-list li {
-      font-size: 0.82rem; padding: 0.7rem 1rem; background: var(--surface2);
-      border: 1px solid var(--border); border-radius: 6px; line-height: 1.65; color: var(--muted);
-    }
-    .challenge-list li .prob { color: #e07070; font-weight: 600; }
-    .challenge-list li .sol { color: #6ecb8a; font-weight: 600; }
-    .result-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-    .result-list li {
-      font-size: 0.82rem; color: var(--muted);
-      padding-left: 1.25rem; position: relative; line-height: 1.65;
-    }
-    .result-list li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.1rem; }
 
     /* ── CONTACT ── */
     #contact {
@@ -459,17 +473,15 @@
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .about-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .modal-two-col { grid-template-columns: 1fr; }
       .modal { padding: 1.5rem; }
       footer { flex-direction: column; }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 2.4rem; }
-      .skills-grid { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .ticker-track, .projects-carousel-inner { animation: none; }
+      .ticker-track { animation: none; }
     }
   </style>
 </head>
@@ -543,9 +555,9 @@
         <h3>Automation &amp; Workflow</h3>
       </div>
       <div class="skill-tags">
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/n8n/EA4B71" onerror="this.style.display='none'" />n8n (self-hosted)</span>
-        <span class="skill-tag">Activepieces</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/zapier/FF4A00" onerror="this.style.display='none'" />Zapier</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/n8n.svg" />n8n (self-hosted)</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/activepieces.svg" />Activepieces</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/zapier.svg" />Zapier</span>
       </div>
     </div>
 
@@ -558,9 +570,9 @@
         <span class="skill-tag">REST APIs</span>
         <span class="skill-tag">Webhooks</span>
         <span class="skill-tag">JSON</span>
-        <span class="skill-tag"><img src="https://www.anthropic.com/favicon.ico" onerror="this.style.display='none'" />Claude API</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/openai/ffffff" onerror="this.style.display='none'" />OpenAI API</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/microsoft/5E5E5E" onerror="this.style.display='none'" />MS Graph API</span>
+        <span class="skill-tag"><img src="https://www.anthropic.com/favicon.ico" />Claude API</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg" />OpenAI API</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoft.svg" />MS Graph API</span>
       </div>
     </div>
 
@@ -571,7 +583,7 @@
       </div>
       <div class="skill-tags">
         <span class="skill-tag">Prompt Engineering</span>
-        <span class="skill-tag">Deepgram</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/deepgram.svg" />Deepgram</span>
         <span class="skill-tag">ElevenLabs</span>
         <span class="skill-tag">faster-whisper</span>
         <span class="skill-tag">MarianMT</span>
@@ -584,10 +596,10 @@
         <h3>Databases &amp; Data</h3>
       </div>
       <div class="skill-tags">
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/postgresql/4169E1" onerror="this.style.display='none'" />PostgreSQL</span>
-        <span class="skill-tag">SQLite</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/airtable/18BFFF" onerror="this.style.display='none'" />Airtable</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/googlesheets/34A853" onerror="this.style.display='none'" />Google Sheets</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/postgresql.svg" />PostgreSQL</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/sqlite.svg" />SQLite</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airtable.svg" />Airtable</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlesheets.svg" />Google Sheets</span>
         <span class="skill-tag">NocoDB</span>
       </div>
     </div>
@@ -598,12 +610,12 @@
         <h3>Infrastructure &amp; DevOps</h3>
       </div>
       <div class="skill-tags">
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/linux/FCC624" onerror="this.style.display='none'" />Linux (Ubuntu)</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/docker/2496ED" onerror="this.style.display='none'" />Docker Compose</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/cloudflare/F38020" onerror="this.style.display='none'" />Cloudflare Tunnel</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linux.svg" />Linux (Ubuntu)</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/docker.svg" />Docker Compose</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/cloudflare.svg" />Cloudflare Tunnel</span>
         <span class="skill-tag">Contabo VPS</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/microsoftazure/0078D4" onerror="this.style.display='none'" />Azure</span>
-        <span class="skill-tag">SSH / Tailscale</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftazure.svg" />Azure</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tailscale.svg" />SSH / Tailscale</span>
       </div>
     </div>
 
@@ -613,12 +625,12 @@
         <h3>Scripting &amp; Development</h3>
       </div>
       <div class="skill-tags">
-        <span class="skill-tag">Google Apps Script</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/typescript/3178C6" onerror="this.style.display='none'" />TypeScript</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" onerror="this.style.display='none'" />JavaScript</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/fastapi/009688" onerror="this.style.display='none'" />Python FastAPI</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/nodedotjs/339933" onerror="this.style.display='none'" />Node.js</span>
-        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googleappsscript.svg" />Google Apps Script</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/typescript.svg" />TypeScript</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/javascript.svg" />JavaScript</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/fastapi.svg" />Python FastAPI</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nodedotjs.svg" />Node.js</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/html5.svg" />HTML/CSS</span>
       </div>
     </div>
 
@@ -628,12 +640,12 @@
         <h3>No-Code / Low-Code</h3>
       </div>
       <div class="skill-tags">
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/notion/ffffff" onerror="this.style.display='none'" />Notion</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/airtable/18BFFF" onerror="this.style.display='none'" />Airtable</span>
-        <span class="skill-tag">Google Workspace</span>
-        <span class="skill-tag">Jotform</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/notion.svg" />Notion</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airtable.svg" />Airtable</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg" />Google Workspace</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/jotform.svg" />Jotform</span>
         <span class="skill-tag">Tally</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/clickup/7B68EE" onerror="this.style.display='none'" />ClickUp</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/clickup.svg" />ClickUp</span>
       </div>
     </div>
 
@@ -643,11 +655,11 @@
         <h3>Web &amp; Protocols</h3>
       </div>
       <div class="skill-tags">
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/vercel/ffffff" onerror="this.style.display='none'" />Vercel</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/github/ffffff" onerror="this.style.display='none'" />GitHub</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vercel.svg" />Vercel</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" />GitHub</span>
         <span class="skill-tag">MCP Server</span>
-        <span class="skill-tag">OneDrive / SharePoint</span>
-        <span class="skill-tag"><img src="https://cdn.simpleicons.org/telegram/26A5E4" onerror="this.style.display='none'" />Telegram Bot API</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftonedrive.svg" />OneDrive / SharePoint</span>
+        <span class="skill-tag"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" />Telegram Bot API</span>
       </div>
     </div>
 
@@ -716,31 +728,28 @@
 </div>
 
 <script>
-// ── TICKER DATA ── (fixed icons via cdn.simpleicons.org)
+// ── TICKER DATA ──
 const tickerItems = [
-  { name: 'n8n',          icon: 'https://cdn.simpleicons.org/n8n/EA4B71' },
-  { name: 'Docker',       icon: 'https://cdn.simpleicons.org/docker/2496ED' },
-  { name: 'Linux',        icon: 'https://cdn.simpleicons.org/linux/FCC624' },
-  { name: 'PostgreSQL',   icon: 'https://cdn.simpleicons.org/postgresql/4169E1' },
-  { name: 'Python',       icon: 'https://cdn.simpleicons.org/python/3776AB' },
-  { name: 'Node.js',      icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
-  { name: 'Claude API',   icon: 'https://www.anthropic.com/favicon.ico' },
-  { name: 'OpenAI',       icon: 'https://cdn.simpleicons.org/openai/ffffff' },
-  { name: 'Google Sheets',icon: 'https://cdn.simpleicons.org/googlesheets/34A853' },
-  { name: 'Airtable',     icon: 'https://cdn.simpleicons.org/airtable/18BFFF' },
-  { name: 'Telegram',     icon: 'https://cdn.simpleicons.org/telegram/26A5E4' },
-  { name: 'Cloudflare',   icon: 'https://cdn.simpleicons.org/cloudflare/F38020' },
-  { name: 'MS Graph API', icon: 'https://cdn.simpleicons.org/microsoft/5E5E5E' },
+  { name: 'n8n', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/n8n.svg' },
+  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/docker.svg' },
+  { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linux.svg' },
+  { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/postgresql.svg' },
+  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/python.svg' },
+  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nodedotjs.svg' },
+  { name: 'Claude API', icon: 'https://www.anthropic.com/favicon.ico' },
+  { name: 'OpenAI', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg' },
+  { name: 'Google Sheets', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlesheets.svg' },
+  { name: 'Airtable', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airtable.svg' },
+  { name: 'Telegram', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg' },
+  { name: 'Cloudflare', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/cloudflare.svg' },
+  { name: 'Microsoft', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoft.svg' },
   { name: 'Activepieces', icon: 'https://activepieces.com/favicon.ico' },
-  { name: 'Zapier',       icon: 'https://cdn.simpleicons.org/zapier/FF4A00' },
-  { name: 'GitHub',       icon: 'https://cdn.simpleicons.org/github/ffffff' },
-  { name: 'Vercel',       icon: 'https://cdn.simpleicons.org/vercel/ffffff' },
-  { name: 'Jotform',      icon: 'https://www.jotform.com/favicon.ico' },
-  { name: 'Tally',        icon: 'https://tally.so/favicon.ico' },
-  { name: 'ClickUp',      icon: 'https://cdn.simpleicons.org/clickup/7B68EE' },
-  { name: 'TypeScript',   icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
-  { name: 'Notion',       icon: 'https://cdn.simpleicons.org/notion/ffffff' },
-  { name: 'Azure',        icon: 'https://cdn.simpleicons.org/microsoftazure/0078D4' },
+  { name: 'Zapier', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/zapier.svg' },
+  { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg' },
+  { name: 'Vercel', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vercel.svg' },
+  { name: 'Jotform', icon: 'https://www.jotform.com/favicon.ico' },
+  { name: 'Tally', icon: 'https://tally.so/favicon.ico' },
+  { name: 'ClickUp', icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/clickup.svg' },
 ];
 
 function buildTicker() {
@@ -878,6 +887,7 @@ function buildProjectCards() {
       </div>
     </div>
   `).join('');
+  // duplicate for seamless loop
   carousel.innerHTML = `
     <div class="projects-carousel-inner">${cardHtml}</div>
     <div class="projects-carousel-inner" aria-hidden="true">${cardHtml}</div>
@@ -953,14 +963,21 @@ document.addEventListener('keydown', function(e) {
 buildTicker();
 buildProjectCards();
 
+// click to open modal
 document.getElementById('projectsGrid').addEventListener('click', e => {
   const card = e.target.closest('.project-card');
   if (card) openModal(card.dataset.id);
 });
 
-let touchStartX = 0;
+// pause on hover already handled by CSS
+// touch support
 const carousel = document.getElementById('projectsGrid');
+let touchStartX = 0;
 carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+carousel.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  // touch scroll is natural on mobile, just ensure click still works
+});
 </script>
 </body>
 </html>
