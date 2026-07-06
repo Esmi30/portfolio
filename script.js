@@ -29,7 +29,7 @@ const tickerItems = [
   { name: 'Python',        icon: 'https://cdn.simpleicons.org/python/3776AB' },
   { name: 'Node.js',       icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
   { name: 'Claude API',    icon: 'https://www.anthropic.com/favicon.ico' },
-  { name: 'OpenAI',        icon: 'https://cdn.simpleicons.org/openai/ffffff' },
+  { name: 'OpenAI',        icon: 'https://cdn.simpleicons.org/openai/74AA9C' },
   { name: 'Google Sheets', icon: 'https://cdn.simpleicons.org/googlesheets/34A853' },
   { name: 'Airtable',      icon: 'https://cdn.simpleicons.org/airtable/18BFFF' },
   { name: 'Telegram',      icon: 'https://cdn.simpleicons.org/telegram/26A5E4' },
@@ -44,7 +44,7 @@ const tickerItems = [
   { name: 'ClickUp',       icon: 'https://cdn.simpleicons.org/clickup/7B68EE' },
   { name: 'Jotform',       icon: 'https://cdn.simpleicons.org/jotform/FF6100' },
   { name: 'Tally',         icon: 'https://tally.so/favicon.ico' },
-  { name: 'Activepieces',  icon: 'https://cdn.simpleicons.org/activepieces/000000' },
+  { name: 'Activepieces',  icon: 'https://cdn.simpleicons.org/activepieces/00C4B4' },
 ];
 
 function buildTicker() {
