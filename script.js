@@ -36,7 +36,7 @@ const tickerItems = [
   { name: 'Cloudflare',    icon: 'https://www.cloudflare.com/favicon.ico' },
   { name: 'Microsoft',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows8/windows8-original.svg' },
   { name: 'Zapier',        icon: 'https://zapier.com/favicon.ico' },
-  { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg' },
+  { name: 'GitHub',        icon: 'https://cdn.simpleicons.org/github/ffffff' },
   { name: 'Vercel',        icon: 'https://vercel.com/favicon.ico' },
   { name: 'TypeScript',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg' },
   { name: 'Notion',        icon: 'https://cdn.simpleicons.org/notion/ffffff' },
