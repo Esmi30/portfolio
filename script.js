@@ -34,17 +34,17 @@ const tickerItems = [
   { name: 'Airtable',      icon: 'https://cdn.simpleicons.org/airtable/18BFFF' },
   { name: 'Telegram',      icon: 'https://cdn.simpleicons.org/telegram/26A5E4' },
   { name: 'Cloudflare',    icon: 'https://cdn.simpleicons.org/cloudflare/F38020' },
-  { name: 'MS Graph API',  icon: 'https://cdn.simpleicons.org/microsoft/5E5E5E' },
-  { name: 'Activepieces',  icon: 'https://activepieces.com/favicon.ico' },
+  { name: 'Microsoft',     icon: 'https://cdn.simpleicons.org/microsoft/5E5E5E' },
   { name: 'Zapier',        icon: 'https://cdn.simpleicons.org/zapier/FF4A00' },
   { name: 'GitHub',        icon: 'https://cdn.simpleicons.org/github/ffffff' },
   { name: 'Vercel',        icon: 'https://cdn.simpleicons.org/vercel/ffffff' },
-  { name: 'Jotform',       icon: 'https://www.jotform.com/favicon.ico' },
-  { name: 'Tally',         icon: 'https://tally.so/favicon.ico' },
-  { name: 'ClickUp',       icon: 'https://cdn.simpleicons.org/clickup/7B68EE' },
   { name: 'TypeScript',    icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
   { name: 'Notion',        icon: 'https://cdn.simpleicons.org/notion/ffffff' },
   { name: 'Azure',         icon: 'https://cdn.simpleicons.org/microsoftazure/0078D4' },
+  { name: 'ClickUp',       icon: 'https://cdn.simpleicons.org/clickup/7B68EE' },
+  { name: 'Jotform',       icon: 'https://cdn.simpleicons.org/jotform/FF6100' },
+  { name: 'Tally',         icon: 'https://tally.so/favicon.ico' },
+  { name: 'Activepieces',  icon: 'https://cdn.simpleicons.org/activepieces/000000' },
 ];
 
 function buildTicker() {
