@@ -203,10 +203,13 @@ function openModal(id) {
     <h2>${p.title}</h2>
     <hr class="modal-divider" />
     ${screenshotsHtml}
-    <div class="modal-section">
-      <p class="modal-label">Overview</p>
-      <p>${p.overview}</p>
-    </div>
+<div class="modal-body-wrap">
+  ${screenshotsHtml}
+  <div class="modal-section">
+    <p class="modal-label">Overview</p>
+    <p>${p.overview}</p>
+  </div>
+</div>
     <div class="modal-section">
       <p class="modal-label">Problem</p>
       <p>${p.problem}</p>
