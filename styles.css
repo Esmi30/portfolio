@@ -318,7 +318,15 @@ nav {
 .modal-eyebrow { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
 .modal h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
 .modal-divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
-.modal-screenshots { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin-bottom: 1.75rem; }
+.modal-screenshots {
+  float: left;
+  width: 280px;
+  margin: 0 1.5rem 1rem 0;
+  flex-shrink: 0;
+}
+.modal-body-wrap {
+  overflow: hidden;
+}
 .modal-screenshot {
   border-radius: 6px; overflow: hidden; border: 1px solid var(--border);
   background: var(--surface2); aspect-ratio: 16/10;
@@ -335,8 +343,13 @@ nav {
   padding: 0.4rem 0.75rem; background: var(--surface2); border-radius: 4px;
 }
 .flow-steps li:not(:last-child)::after {
-  content: '↓'; display: block; text-align: center;
-  font-size: 0.7rem; color: var(--border); margin-top: 0.15rem;
+  content: '↓';
+  display: block;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--border);
+  margin-top: 0.15rem;
+  line-height: 1;
 }
 .tech-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
