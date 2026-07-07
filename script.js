@@ -280,3 +280,15 @@ if (emailEl) {
   });
 }
 
+// ── COPY FOOTER EMAIL ──
+const footerEmail = document.querySelector('.footer-links a[href^="mailto"]');
+if (footerEmail) {
+  footerEmail.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('edqtorres@gmail.com').then(() => {
+      const original = footerEmail.textContent;
+      footerEmail.textContent = 'Copied!';
+      setTimeout(() => { footerEmail.textContent = original; }, 2000);
+    });
+  });
+}
