@@ -266,3 +266,17 @@ document.getElementById('projectsGrid').addEventListener('click', e => {
 // ── INIT ──
 buildTicker();
 buildProjectCards();
+
+// ── COPY EMAIL TO CLIPBOARD ──
+const emailEl = document.querySelector('.contact-email');
+if (emailEl) {
+  emailEl.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('edqtorres@gmail.com').then(() => {
+      const original = emailEl.textContent;
+      emailEl.textContent = 'Copied!';
+      setTimeout(() => { emailEl.textContent = original; }, 2000);
+    });
+  });
+}
+
