@@ -289,7 +289,7 @@ nav {
 }
 .project-thumb img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; background: var(--surface2); }
 .project-card:hover .project-thumb img { transform: scale(1.04); }
-.project-thumb-placeholder { font-family: var(--mono); font-size: 0.7rem; color: var(--border); letter-spacing: 0.08em; }
+.project-thumb-placeholder { font-family: var(--mono); font-size: 0.75rem; color: #b99ede; letter-spacing: 0.08em; }
 .project-card-body { padding: 1rem 1.25rem 1.25rem; }
 .project-card-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .project-card-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
