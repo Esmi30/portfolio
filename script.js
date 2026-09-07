@@ -89,7 +89,7 @@ const projects = [
     nda: true,
     screenshots: [],
     overview: 'End-to-end automation suite across a Microsoft 365 tenant: staleness detection on OneNote sections with personalized reminder emails, Excel-as-database operations via Graph workbook API, OneDrive content-hash dedup index across ~95k files, and two-way sync between a web app and live spreadsheets.',
-    problem: 'The client had critical data spread across OneNote, Excel, OneDrive, and shared mailboxes with no automated monitoring, deduplication, or sync — all managed manually.',
+    problem: 'The client had critical data spread across OneNote, Excel, OneDrive, and shared mailboxes with no automated monitoring, deduplication, or sync, all managed manually.',
     solution: 'App-token and delegate access across tenant mailboxes via Microsoft Graph API. HTML mail generation with inline image attachments (CID). Excel operations use logical-row addressing by header name making them layout-proof. OneDrive indexing uses delta queries for incremental updates across 95k+ files.',
     flow: ['Graph API polls OneNote / OneDrive / mailboxes', 'Staleness detection compares timestamps', 'Reminder emails generated with inline images', 'Excel ranges written atomically via workbook API', 'Dedup index updated via delta query'],
     tech: ['Microsoft Graph API', 'Python', 'Node.js', 'Excel (Graph workbook API)', 'OneDrive', 'SharePoint', 'OAuth2'],
@@ -112,7 +112,7 @@ const projects = [
     flow: ['PDF invoices extracted via pdftotext → JSON index', 'Contract terms checked via regex markers', 'LLM judge called on miss (strict-JSON verdict)', 'Bank statements ingested and normalized', 'Factoring accounts reconstructed from supplier emails', 'Transactions matched to the cent via evidence chain'],
     tech: ['Python', 'pdftotext', 'python-docx', 'openpyxl', 'Claude API', 'OpenAI API', 'SQLite', 'Bash'],
     challenges: [
-      { p: 'Contract markers varied between document versions', s: 'Built a self-teaching marker list — unknown patterns generate maintainer notes instead of false alarms and are added to the list after review' },
+      { p: 'Contract markers varied between document versions', s: 'Built a self-teaching marker list, unknown patterns generate maintainer notes instead of false alarms and are added to the list after review' },
       { p: 'Bank statements from different banks had inconsistent formats', s: 'Built per-bank normalizers with a unified transaction schema for reconciliation' },
       { p: 'Factoring account not visible in ERP', s: 'Reconstructed factoring account from supplier email threads using a multi-source evidence chain' },
     ],
