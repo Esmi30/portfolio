@@ -229,7 +229,6 @@ function buildProjectCards() {
   const carousel = document.getElementById('projectsGrid');
   const cardHtml = projects.map(p => `
     <div class="project-card" data-id="${p.id}">
-      ${p.nda ? '<span class="project-nda">NDA</span>' : ''}
       <div class="project-thumb">
         ${p.screenshots[0]
           ? `<img src="${p.screenshots[0]}" alt="${p.title}" />`
