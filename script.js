@@ -70,7 +70,7 @@ const projects = [
     tags: ['Open WebUI', 'Python', 'Node.js', 'SQLite', 'Caddy'],
     nda: true,
     screenshots: [],
-    overview: 'Company-wide "ChatGPT" deployed on-premise for a European renewable-energy EPC firm. Multi-provider LLM gateway (OpenAI and Anthropic protocols), per-user request auditing, local speech-to-text, web search integration, and PWA mobile access — all running without Docker or root, on a shared VPS.',
+    overview: 'Company-wide "ChatGPT" deployed on-premise for a European renewable-energy EPC firm. Multi-provider LLM gateway (OpenAI and Anthropic protocols), per-user request auditing, local speech-to-text, web search integration, and PWA mobile access, all running without Docker or root, on a shared VPS.',
     problem: 'The client needed a private, auditable AI chat platform for internal use without exposing company data to third-party cloud services, and without requiring root access or Docker on the production server.',
     solution: 'Open WebUI deployed via Python venv as a service user with CPU-only torch and cron-based autostart. A custom Node.js + SQLite audit layer sits between the reverse proxy and the LLM gateway, logging every request per user. Caddy handles TLS and path-based routing across chat, API, and audit console endpoints.',
     flow: ['User accesses PWA via Caddy reverse proxy', 'Audit layer logs request (user, tokens, timestamp)', 'LLM gateway routes to OpenAI / Anthropic / local model', 'Response returned and logged', 'Admin views audit console for usage per user'],
@@ -80,7 +80,7 @@ const projects = [
       { p: 'No visibility into which users were consuming AI tokens', s: 'Built a custom Node.js audit layer between proxy and gateway logging every request with token counts per user' },
       { p: 'Mobile access required without a native app', s: 'Configured PWA manifest and Caddy TLS so staff could install the platform as a home-screen app on phones' },
     ],
-    results: ['Live in production for a European EPC company', 'Full per-user audit trail with admin console', 'Zero third-party data exposure — all inference on-premise or via direct API', 'Local speech-to-text at zero API cost via faster-whisper']
+    results: ['Live in production for a European EPC company', 'Full per-user audit trail with admin console', 'Zero third-party data exposure, all inference on-premise or via direct API', 'Local speech-to-text at zero API cost via faster-whisper']
   },
   {
     id: 'graphautomation',
@@ -96,9 +96,9 @@ const projects = [
     challenges: [
       { p: 'hasAttachments=false trap causing missed inline-only image attachments', s: 'Built custom attachment extraction that checks message body for CID references regardless of the hasAttachments flag' },
       { p: 'Excel row addressing breaking when columns were reordered', s: 'Switched to logical-row addressing by header name making all writes layout-proof' },
-      { p: 'Indexing 95k OneDrive files without hammering the API', s: 'Used Graph delta queries for incremental updates — only changed files are re-indexed on each run' },
+      { p: 'Indexing 95k OneDrive files without hammering the API', s: 'Used Graph delta queries for incremental updates, only changed files are re-indexed on each run' },
     ],
-    results: ['Automated staleness detection and reminder emails across full tenant', 'Layout-proof Excel sync with atomic range writes', '95k-file OneDrive dedup index with delta-query incremental updates', 'Test-mode flag pattern for safe rollout — all mail redirected to bot inbox until sign-off']
+    results: ['Automated staleness detection and reminder emails across full tenant', 'Layout-proof Excel sync with atomic range writes', '95k-file OneDrive dedup index with delta-query incremental updates', 'Test-mode flag pattern for safe rollout, all mail redirected to bot inbox until sign-off']
   },
   {
     id: 'financialintel',
@@ -107,12 +107,12 @@ const projects = [
     nda: true,
     screenshots: [],
     overview: 'Three interconnected systems: an invoice archive indexer (PDF to JSON knowledge base), a contract-terms watchdog with LLM judge fallback, and a bank reconciliation engine that reconstructs factoring accounts from supplier emails and matches transactions to the cent across multiple banks.',
-    problem: 'The client had hundreds of PDF invoices, Word contracts, and multi-bank statements with no automated way to search, validate terms, or reconcile accounts — all done manually and error-prone.',
-    solution: 'Invoice indexer: pdftotext extraction to JSON keyed by invoice number with threaded rebuild. Contract watchdog: python-docx full-text extraction with regex marker detection and a self-teaching marker list — LLM judge fallback on miss with strict-JSON verdicts. Bank reconciliation: evidence-chain method across ERP mirror, local indexes, document store, and mailboxes.',
+    problem: 'The client had hundreds of PDF invoices, Word contracts, and multi-bank statements with no automated way to search, validate terms, or reconcile accounts, all done manually and error-prone.',
+    solution: 'Invoice indexer: pdftotext extraction to JSON keyed by invoice number with threaded rebuild. Contract watchdog: python-docx full-text extraction with regex marker detection and a self-teaching marker list with LLM judge fallback on miss with strict-JSON verdicts. Bank reconciliation: evidence-chain method across ERP mirror, local indexes, document store, and mailboxes.',
     flow: ['PDF invoices extracted via pdftotext → JSON index', 'Contract terms checked via regex markers', 'LLM judge called on miss (strict-JSON verdict)', 'Bank statements ingested and normalized', 'Factoring accounts reconstructed from supplier emails', 'Transactions matched to the cent via evidence chain'],
     tech: ['Python', 'pdftotext', 'python-docx', 'openpyxl', 'Claude API', 'OpenAI API', 'SQLite', 'Bash'],
     challenges: [
-      { p: 'Contract markers varied between document versions', s: 'Built a self-teaching marker list — unknown patterns generate maintainer notes instead of false alarms, and are added to the list after review' },
+      { p: 'Contract markers varied between document versions', s: 'Built a self-teaching marker list — unknown patterns generate maintainer notes instead of false alarms and are added to the list after review' },
       { p: 'Bank statements from different banks had inconsistent formats', s: 'Built per-bank normalizers with a unified transaction schema for reconciliation' },
       { p: 'Factoring account not visible in ERP', s: 'Reconstructed factoring account from supplier email threads using a multi-source evidence chain' },
     ],
@@ -125,7 +125,7 @@ const projects = [
     nda: true,
     screenshots: [],
     overview: 'WhatsApp automation stack handling daily production reports with escalation chains, voice-note transcription via self-hosted Whisper container, photo archiving with GPS/caption/vision-model classification, and meeting transcription via local ffmpeg extraction piped to the Whisper container.',
-    problem: 'Client received frequent multilingual voice notes and production reports via WhatsApp and had to manually listen, translate, archive photos, and transcribe meetings — slow and unscalable.',
+    problem: 'Client received frequent multilingual voice notes and production reports via WhatsApp and had to manually listen, translate, archive photos, and transcribe meetings, slow and unscalable.',
     solution: 'Node.js handles WhatsApp events and access control. Self-hosted Whisper container accepts base64 audio jobs via REST. Photos are archived with GPS metadata extraction, caption parsing, and vision-model classification. Meeting audio is extracted locally via ffmpeg then SCP-transferred to the Whisper container.',
     flow: ['WhatsApp message received', 'Node.js: access control + message type routing', 'Voice note → Whisper container (base64 REST job)', 'Photo → GPS/caption/vision-model classifier', 'Meeting audio → ffmpeg → SCP → Whisper → task extraction', 'Report or transcript delivered to recipient'],
     tech: ['Node.js', 'Python FastAPI', 'Docker Compose', 'faster-whisper', 'ffmpeg', 'Contabo VPS', 'Telegram (alerts)'],
@@ -149,7 +149,7 @@ const projects = [
     tech: ['PHP', 'Laravel', 'Blade', 'MySQL', 'JavaScript', 'openpyxl', 'Excel (Graph workbook API)'],
     challenges: [
       { p: 'Sync deleting records it should not own', s: 'Scoped deletion reconciliation to only synced records using set-diff, with empty-payload guards to prevent accidental mass-delete' },
-      { p: 'Silently-dead upstream feeds reporting success', s: 'Built per-feed "newest record age" semaphores — if no new data arrives within threshold, an alert fires regardless of worker exit code' },
+      { p: 'Silently-dead upstream feeds reporting success', s: 'Built per-feed "newest record age" semaphores, if no new data arrives within threshold an alert fires regardless of worker exit code' },
       { p: 'Calendar scheduling broken across time zones', s: 'Implemented timezone-correct scheduling in the drag-and-drop calendar using UTC normalization on all writes' },
     ],
     results: ['10k+ row data tables running smoothly in production', 'Excel stays source of truth with safe one-way sync and deletion reconciliation', 'Data-freshness guards catch dead feeds before they cause downstream errors', 'Role-gated pages and dashboards deployed for field and management teams']
