@@ -272,11 +272,15 @@ nav {
   flex: 0 0 300px;
 }
 .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.project-nda-bar {
+  padding: 0.4rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(123,94,167,0.1);
+}
 .project-nda {
-  position: absolute; top: 0.75rem; right: 0.75rem;
   font-family: var(--mono); font-size: 0.6rem; padding: 0.15rem 0.45rem;
   border-radius: 3px; background: rgba(123,94,167,0.25); color: #b99ede;
-  border: 1px solid rgba(123,94,167,0.35); letter-spacing: 0.08em; z-index: 2;
+  border: 1px solid rgba(123,94,167,0.35); letter-spacing: 0.08em;
 }
 .project-thumb {
   width: 100%; height: 140px; background: var(--surface2);
