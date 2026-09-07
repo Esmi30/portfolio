@@ -230,13 +230,8 @@ function buildProjectCards() {
   const cardHtml = projects.map(p => `
     <div class="project-card" data-id="${p.id}">
       <div class="project-thumb">
-        ${p.nda
-  ? `<span class="project-thumb-placeholder">🔒 Under NDA</span>`
-  : p.screenshots[0]
-    ? `<img src="${p.screenshots[0]}" alt="${p.title}" />`
-    : `<span class="project-thumb-placeholder">screenshot coming soon</span>`}
+        ${p.nda ? `<span class="project-thumb-placeholder">🔒 Under NDA</span>` : p.screenshots[0] ? `<img src="${p.screenshots[0]}" alt="${p.title}" />` : `<span class="project-thumb-placeholder">screenshot coming soon</span>`}
       </div>
-      ${p.nda ? '<div class="project-nda-bar"><span class="project-nda">Under NDA</span></div>' : ''}
       <div class="project-card-body">
         <h3>${p.title}</h3>
         <div class="project-card-tags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>
