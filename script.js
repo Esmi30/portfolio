@@ -252,7 +252,7 @@ function openModal(id) {
   const p = projects.find(x => x.id === id);
   if (!p) return;
 
-  const screenshotsHtml = p.screenshots.length
+  const screenshotsHtml = (!p.nda && p.screenshots.length)
     ? `<div class="modal-screenshots">${p.screenshots.map(s => `<div class="modal-screenshot"><img src="${s}" alt="" /></div>`).join('')}</div>`
     : '';
 
