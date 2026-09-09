@@ -301,7 +301,6 @@ nav {
   display: flex;
   gap: 1rem;
   padding-left: 1rem;
-  animation: carousel-scroll 30s linear infinite;
   flex-shrink: 0;
 }
 .projects-carousel:hover .projects-carousel-inner { animation-play-state: paused; }
