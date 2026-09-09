@@ -347,6 +347,7 @@ if (footerEmail) {
 
 // ── CAROUSEL INFINITE DRAG SCROLL ──
 const carouselEl = document.getElementById('projectsGrid');
+const carouselWrap = document.querySelector('.projects-carousel-wrap');
 let pos = 0;
 let speed = 0.5;
 let dragging = false;
@@ -383,7 +384,7 @@ function animate() {
   animFrameId = requestAnimationFrame(animate);
 }
 
-carouselEl.addEventListener('mousedown', (e) => {
+carouselWrap.addEventListener('mousedown', (e) => {
   dragging = true;
   carouselEl.classList.add('dragging');
   dragStartX = e.pageX;
