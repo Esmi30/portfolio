@@ -344,13 +344,6 @@ if (footerEmail) {
   });
 }
 
-// ── CAROUSEL BUTTONS ──
-document.getElementById('carouselLeft').addEventListener('click', () => {
-  document.getElementById('projectsGrid').scrollBy({ left: -320, behavior: 'smooth' });
-});
-document.getElementById('carouselRight').addEventListener('click', () => {
-  document.getElementById('projectsGrid').scrollBy({ left: 320, behavior: 'smooth' });
-});
 
 buildTicker();
 buildProjectCards();
