@@ -344,6 +344,33 @@ if (footerEmail) {
   });
 }
 
+// ── CAROUSEL DRAG TO SCROLL ──
+const carouselEl = document.getElementById('projectsGrid');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+carouselEl.addEventListener('mousedown', (e) => {
+  isDown = true;
+  carouselEl.classList.add('dragging');
+  startX = e.pageX - carouselEl.offsetLeft;
+  scrollLeft = carouselEl.scrollLeft;
+});
+carouselEl.addEventListener('mouseleave', () => {
+  isDown = false;
+  carouselEl.classList.remove('dragging');
+});
+carouselEl.addEventListener('mouseup', () => {
+  isDown = false;
+  carouselEl.classList.remove('dragging');
+});
+carouselEl.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - carouselEl.offsetLeft;
+  const walk = (x - startX) * 2;
+  carouselEl.scrollLeft = scrollLeft - walk;
+});
 
 buildTicker();
 buildProjectCards();
