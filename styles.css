@@ -291,11 +291,10 @@ nav {
 .projects-carousel {
   display: flex;
   gap: 0;
-  overflow-x: auto;
+  overflow: hidden;
   padding: 1rem 0 1.5rem;
   cursor: grab;
   user-select: none;
-  scrollbar-width: none;
 }
 .projects-carousel.dragging { cursor: grabbing; }
 .projects-carousel-inner {
