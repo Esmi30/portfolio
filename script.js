@@ -347,29 +347,29 @@ if (footerEmail) {
 // ── CAROUSEL DRAG TO SCROLL ──
 const carouselEl = document.getElementById('projectsGrid');
 let isDown = false;
-let startX;
-let scrollLeft;
+let startX = 0;
+let offset = 0;
+let currentX = 0;
 
 carouselEl.addEventListener('mousedown', (e) => {
   isDown = true;
   carouselEl.classList.add('dragging');
-  startX = e.pageX - carouselEl.offsetLeft;
-  scrollLeft = carouselEl.scrollLeft;
+  startX = e.pageX;
+  currentX = offset;
+  carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    el.style.transform = `translateX(${currentX}px)`;
+  });
 });
-carouselEl.addEventListener('mouseleave', () => {
-  isDown = false;
-  carouselEl.classList.remove('dragging');
-});
-carouselEl.addEventListener('mouseup', () => {
-  isDown = false;
-  carouselEl.classList.remove('dragging');
-});
+carouselEl.addEventListener('mouseleave', () => { isDown = false; carouselEl.classList.remove('dragging'); });
+carouselEl.addEventListener('mouseup', () => { isDown = false; carouselEl.classList.remove('dragging'); });
 carouselEl.addEventListener('mousemove', (e) => {
   if (!isDown) return;
   e.preventDefault();
-  const x = e.pageX - carouselEl.offsetLeft;
-  const walk = (x - startX) * 2;
-  carouselEl.scrollLeft = scrollLeft - walk;
+  offset = currentX + (e.pageX - startX);
+  carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
+    el.style.transform = `translateX(${offset}px)`;
+  });
 });
 
 buildTicker();
