@@ -314,6 +314,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 document.getElementById('projectsGrid').addEventListener('click', e => {
+  if (Math.abs(pos - dragStartPos) > 5) return;
   const card = e.target.closest('.project-card');
   if (card) openModal(card.dataset.id);
 });
