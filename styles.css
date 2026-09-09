@@ -504,3 +504,20 @@ footer p { font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
   .ticker-track, .projects-carousel-inner { animation: none; }
   [data-aos] { opacity: 1; transform: none; }
 }
+
+.carousel-btn {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 2.5rem; height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+.carousel-btn:hover { border-color: var(--accent); color: var(--accent); }
+.carousel-btn-left { left: 0; }
+.carousel-btn-right { right: 0; }
