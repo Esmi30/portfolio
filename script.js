@@ -344,33 +344,64 @@ if (footerEmail) {
   });
 }
 
-// ── CAROUSEL DRAG TO SCROLL ──
+// ── CAROUSEL INFINITE DRAG SCROLL ──
 const carouselEl = document.getElementById('projectsGrid');
-let isDown = false;
-let startX = 0;
-let offset = 0;
-let currentX = 0;
+let pos = 0;
+let speed = 0.5;
+let dragging = false;
+let dragStartX = 0;
+let dragStartPos = 0;
+let animFrameId;
+
+function getInnerWidth() {
+  const inner = carouselEl.querySelector('.projects-carousel-inner');
+  return inner ? inner.offsetWidth + 16 : 0;
+}
+
+function setPos(p) {
+  const innerWidth = getInnerWidth();
+  if (innerWidth > 0) {
+    pos = ((p % innerWidth) + innerWidth) % innerWidth;
+    pos = -pos;
+  }
+  carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
+    el.style.transform = `translateX(${pos}px)`;
+    el.style.animation = 'none';
+  });
+}
+
+function animate() {
+  if (!dragging) {
+    const innerWidth = getInnerWidth();
+    pos -= speed;
+    if (Math.abs(pos) >= innerWidth) pos = 0;
+    carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
+      el.style.transform = `translateX(${pos}px)`;
+    });
+  }
+  animFrameId = requestAnimationFrame(animate);
+}
 
 carouselEl.addEventListener('mousedown', (e) => {
-  isDown = true;
+  dragging = true;
   carouselEl.classList.add('dragging');
-  startX = e.pageX;
-  currentX = offset;
+  dragStartX = e.pageX;
+  dragStartPos = pos;
+});
+window.addEventListener('mouseup', () => {
+  dragging = false;
+  carouselEl.classList.remove('dragging');
+});
+window.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  const diff = e.pageX - dragStartX;
+  pos = dragStartPos + diff;
   carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
-    el.style.animationPlayState = 'paused';
-    el.style.transform = `translateX(${currentX}px)`;
+    el.style.transform = `translateX(${pos}px)`;
   });
 });
-carouselEl.addEventListener('mouseleave', () => { isDown = false; carouselEl.classList.remove('dragging'); });
-carouselEl.addEventListener('mouseup', () => { isDown = false; carouselEl.classList.remove('dragging'); });
-carouselEl.addEventListener('mousemove', (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  offset = currentX + (e.pageX - startX);
-  carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
-    el.style.transform = `translateX(${offset}px)`;
-  });
-});
+
+animate();
 
 buildTicker();
 buildProjectCards();
