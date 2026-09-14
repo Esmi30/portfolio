@@ -398,6 +398,11 @@ window.addEventListener('mousemove', (e) => {
   if (!dragging) return;
   const diff = e.pageX - dragStartX;
   pos = dragStartPos + diff;
+  const innerWidth = getInnerWidth();
+  if (innerWidth > 0) {
+    pos = ((pos % innerWidth) + innerWidth) % innerWidth;
+    if (pos > 0) pos = pos - innerWidth;
+  }
   carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
     el.style.transform = `translateX(${pos}px)`;
   });
