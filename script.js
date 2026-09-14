@@ -403,7 +403,14 @@ window.addEventListener('mousemove', (e) => {
   });
 });
 
-animate();
-
 buildTicker();
 buildProjectCards();
+
+// disable CSS animation since JS handles it
+carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
+  el.style.animation = 'none';
+  el.style.transform = 'translateX(0px)';
+});
+
+pos = 0;
+setTimeout(() => animate(), 100);
