@@ -303,7 +303,7 @@ nav {
   padding-left: 0;
   flex-shrink: 0;
 }
-.projects-carousel:hover .projects-carousel-inner { animation-play-state: paused; }
+
 @keyframes carousel-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(calc(-100% - 1rem)); }
