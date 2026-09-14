@@ -375,13 +375,16 @@ function setPos(p) {
 function animate() {
   if (!dragging) {
     const innerWidth = getInnerWidth();
-    pos -= speed;
-    if (Math.abs(pos) >= innerWidth) pos = 0;
+    if (innerWidth > 0) {
+      pos -= speed;
+      if (pos <= -innerWidth) pos = 0;
+      if (pos > 0) pos = -innerWidth + pos;
+    }
     carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
       el.style.transform = `translateX(${pos}px)`;
     });
   }
-  animFrameId = requestAnimationFrame(animate);
+  requestAnimationFrame(animate);
 }
 
 carouselWrap.addEventListener('mousedown', (e) => {
