@@ -406,11 +406,14 @@ window.addEventListener('mousemove', (e) => {
 buildTicker();
 buildProjectCards();
 
-// disable CSS animation since JS handles it
-carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
-  el.style.animation = 'none';
-  el.style.transform = 'translateX(0px)';
-});
+buildTicker();
+buildProjectCards();
 
-pos = 0;
-setTimeout(() => animate(), 100);
+setTimeout(() => {
+  carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
+    el.style.animation = 'none';
+    el.style.transform = 'translateX(0px)';
+  });
+  pos = 0;
+  animate();
+}, 200);
