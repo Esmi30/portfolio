@@ -260,7 +260,8 @@ nav {
   border-radius: 10px;
   overflow: hidden;
 }
-.skill-block { background: var(--surface); padding: 1.75rem; }
+.skill-block { background: var(--surface); padding: 1.75rem; }.skill-block { background: var(--surface); padding: 1.75rem; }
+.skill-block-hidden { display: none; }
 .skill-block-header {
   display: flex; align-items: center; gap: 0.75rem;
   margin-bottom: 1rem;
