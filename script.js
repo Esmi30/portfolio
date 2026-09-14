@@ -51,6 +51,17 @@ const tickerItems = [
   { name: 'Open WebUI',    icon: 'https://openwebui.com/favicon.png' },
 ];
 
+// ── SKILLS TOGGLE ──
+const skillsToggle = document.getElementById('skillsToggle');
+if (skillsToggle) {
+  skillsToggle.addEventListener('click', () => {
+    const hidden = document.querySelectorAll('.skill-block-hidden');
+    const isHidden = getComputedStyle(hidden[0]).display === 'none';
+    hidden.forEach(el => el.style.display = isHidden ? 'block' : 'none');
+    skillsToggle.textContent = isHidden ? 'Show less ↑' : 'See all skills ↓';
+  });
+}
+
 function buildTicker() {
   const track = document.getElementById('tickerTrack');
   const single = tickerItems.map(t => `
