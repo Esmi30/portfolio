@@ -53,24 +53,14 @@ const tickerItems = [
 
 // ── SKILLS TOGGLE ──
 const skillsToggle = document.getElementById('skillsToggle');
-if (skillsToggle) {
+const extraSkills = document.getElementById('extraSkills');
+if (skillsToggle && extraSkills) {
   skillsToggle.addEventListener('click', () => {
-    const hidden = document.querySelectorAll('.skill-block-hidden');
-    const isHidden = getComputedStyle(hidden[0]).display === 'none';
-    hidden.forEach(el => el.style.display = isHidden ? 'block' : 'none');
-    skillsToggle.textContent = isHidden ? 'Show less ↑' : 'See all skills ↓';
+    const isHidden = extraSkills.hidden;
+    extraSkills.hidden = !isHidden;
+    skillsToggle.setAttribute('aria-expanded', String(isHidden));
+    skillsToggle.textContent = isHidden ? 'Show less ↑' : 'Show more tools ↓';
   });
-}
-
-function buildTicker() {
-  const track = document.getElementById('tickerTrack');
-  const single = tickerItems.map(t => `
-    <span class="ticker-item">
-      <img src="${t.icon}" alt="" onerror="this.style.display='none'" />
-      ${t.name}
-    </span>
-  `).join('');
-  track.innerHTML = single + single + single;
 }
 
 // ── PROJECTS ──
