@@ -51,6 +51,19 @@ const tickerItems = [
   { name: 'Open WebUI',    icon: 'https://openwebui.com/favicon.png' },
 ];
 
+function buildTicker() {
+  const track = document.getElementById('tickerTrack');
+  if (!track) return;
+  const itemHtml = tickerItems.map(t => `
+    <span class="ticker-item">
+      <img src="${t.icon}" alt="" loading="lazy" onerror="this.remove()" />
+      ${t.name}
+    </span>
+  `).join('');
+  // duplicate once so -50% keyframe loops seamlessly
+  track.innerHTML = itemHtml + itemHtml;
+}
+
 // ── SKILLS TOGGLE ──
 const skillsToggle = document.getElementById('skillsToggle');
 const extraSkills = document.getElementById('extraSkills');
