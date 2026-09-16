@@ -237,6 +237,24 @@ const projects = [
     ],
     results: ['Zero manual work in managing leads', 'Every inquiry captured instantly on form submission', 'Telegram notification within seconds', 'Follow-up task auto-created in ClickUp for every lead']
   },
+    {
+    id: 'emailintel',
+    title: 'Email Intelligence & Lead Automation',
+    tags: ['Python', 'Claude API', 'MS Graph API', 'LLM Judge'],
+    nda: true,
+    screenshots: [],
+    overview: 'Autonomous email pipeline for lead management: layered spam filtering (deterministic rules first, LLM judge only for ambiguous cases), automatic replies, deduplication, special-case routing to partners, and a quote-error watchdog that catches calculation mistakes in outgoing offers before they reach clients.',
+    problem: 'Inbound leads arrived mixed with spam, bounces, and marketing noise. Every email needed manual triage, and calculation errors in outgoing quotes were only caught after clients noticed them.',
+    solution: 'Fail-open layered classifier: hard rules decide the clear cases (valid phone patterns, spam keywords, bounce markers), an LLM judge with strict-JSON verdicts handles only the ambiguous middle. A v2 filter ran weeks in shadow mode, logging divergences against production before any promotion decision. A separate watchdog re-checks totals in outgoing quotes every 5 minutes and alerts on anomalies.',
+    flow: ['Inbound email polled from mailbox', 'Deterministic rules: obvious lead / obvious spam', 'Ambiguous → LLM judge (strict-JSON verdict)', 'Lead logged to CRM sheet + auto-reply sent', 'Special categories forwarded to partner company', 'Outgoing quotes monitored for calculation errors'],
+    tech: ['Python', 'MS Graph API', 'Claude API', 'SQLite', 'cron', 'shadow-mode rollout'],
+    challenges: [
+      { p: 'LLM verdicts were non-deterministic on short messages, risking lost leads', s: 'Inverted the design: deterministic rules can only SAVE a lead, the AI is consulted only when rules are silent, and the system fails open (doubt = lead)' },
+      { p: 'No safe way to test a stricter filter on live traffic', s: 'Ran the new version in shadow mode for two weeks: it logged its verdicts alongside production without any power, divergences were reviewed one by one before deciding' },
+      { p: 'Bounce notifications from the form domain were classified as leads', s: 'Added a deterministic bounce/NDR guard that stops delivery-failure emails before the classification chain' },
+    ],
+    results: ['Runs unattended in production, every lead answered automatically', 'Real calculation error caught in an outgoing quote before the client saw it', 'Shadow-mode evaluation: divergences reviewed, production hole found and fixed deterministically', 'Zero lost leads since the fail-open guard went live']
+  },
 ];
 
 function buildProjectCards() {
