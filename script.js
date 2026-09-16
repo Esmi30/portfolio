@@ -415,9 +415,6 @@ window.addEventListener('mousemove', (e) => {
 buildTicker();
 buildProjectCards();
 
-buildTicker();
-buildProjectCards();
-
 setTimeout(() => {
   carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
     el.style.animation = 'none';
