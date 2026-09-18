@@ -1,24 +1,31 @@
-// ── SCROLL PROGRESS BAR ──
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = (scrollTop / docHeight) * 100;
-  document.getElementById('scroll-progress').style.width = progress + '%';
-});
-
-// ── ACTIVE NAV HIGHLIGHT ──
+// ── SCROLL PROGRESS BAR + ACTIVE NAV HIGHLIGHT ──
+// One listener for both, throttled to one run per animation frame.
+const progressBar = document.getElementById('scroll-progress');
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
+let scrollTicking = false;
+
+function onScroll() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  if (progressBar) {
+    progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+  }
+
   let current = '';
   sections.forEach(section => {
-    if (window.scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
+    if (scrollTop >= section.offsetTop - 100) current = section.getAttribute('id');
   });
   navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
   });
-});
+}
+
+window.addEventListener('scroll', () => {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(() => { onScroll(); scrollTicking = false; });
+}, { passive: true });
 
 // ── TICKER ──
 const tickerItems = [
@@ -346,7 +353,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 document.getElementById('projectsGrid').addEventListener('click', e => {
-  if (Math.abs(pos - dragStartPos) > 5) return;
+  if (dragMoved) return;
   const card = e.target.closest('.project-card');
   if (card) openModal(card.dataset.id);
 });
@@ -385,23 +392,13 @@ let speed = 0.5;
 let dragging = false;
 let dragStartX = 0;
 let dragStartPos = 0;
-let animFrameId;
+let dragStartY = 0;
+let dragMoved = false;
+let dragAxis = null;
 
 function getInnerWidth() {
   const inner = carouselEl.querySelector('.projects-carousel-inner');
   return inner ? inner.offsetWidth + 16 : 0;
-}
-
-function setPos(p) {
-  const innerWidth = getInnerWidth();
-  if (innerWidth > 0) {
-    pos = ((p % innerWidth) + innerWidth) % innerWidth;
-    pos = -pos;
-  }
-  carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
-    el.style.transform = `translateX(${pos}px)`;
-    el.style.animation = 'none';
-  });
 }
 
 function animate() {
@@ -419,19 +416,9 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
-carouselWrap.addEventListener('mousedown', (e) => {
-  dragging = true;
-  carouselEl.classList.add('dragging');
-  dragStartX = e.pageX;
-  dragStartPos = pos;
-});
-window.addEventListener('mouseup', () => {
-  dragging = false;
-  carouselEl.classList.remove('dragging');
-});
-window.addEventListener('mousemove', (e) => {
-  if (!dragging) return;
-  const diff = e.pageX - dragStartX;
+// ── DRAG CORE (shared by mouse and touch) ──
+function applyDragDelta(diff) {
+  if (Math.abs(diff) > 5) dragMoved = true;
   pos = dragStartPos + diff;
   const innerWidth = getInnerWidth();
   if (innerWidth > 0) {
@@ -441,7 +428,61 @@ window.addEventListener('mousemove', (e) => {
   carouselEl.querySelectorAll('.projects-carousel-inner').forEach(el => {
     el.style.transform = `translateX(${pos}px)`;
   });
+}
+
+function dragStart(x, y) {
+  dragging = true;
+  dragMoved = false;
+  dragAxis = null;
+  dragStartX = x;
+  dragStartY = y;
+  dragStartPos = pos;
+}
+
+function dragEnd() {
+  dragging = false;
+  dragAxis = null;
+  carouselEl.classList.remove('dragging');
+}
+
+// ── MOUSE ──
+carouselWrap.addEventListener('mousedown', (e) => {
+  dragStart(e.pageX, e.pageY);
+  carouselEl.classList.add('dragging');
 });
+window.addEventListener('mouseup', dragEnd);
+window.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  applyDragDelta(e.pageX - dragStartX);
+});
+
+// ── TOUCH ──
+// Axis lock: the gesture is only claimed once it is clearly horizontal, so
+// vertical page scrolling that starts on the carousel still works normally.
+carouselWrap.addEventListener('touchstart', (e) => {
+  const t = e.touches[0];
+  dragStart(t.pageX, t.pageY);
+}, { passive: true });
+
+carouselWrap.addEventListener('touchmove', (e) => {
+  if (!dragging) return;
+  const t = e.touches[0];
+  const dx = t.pageX - dragStartX;
+  const dy = t.pageY - dragStartY;
+
+  if (dragAxis === null) {
+    if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+    if (Math.abs(dy) > Math.abs(dx)) { dragging = false; return; }
+    dragAxis = 'x';
+    carouselEl.classList.add('dragging');
+  }
+
+  e.preventDefault();
+  applyDragDelta(dx);
+}, { passive: false });
+
+carouselWrap.addEventListener('touchend', dragEnd);
+carouselWrap.addEventListener('touchcancel', dragEnd);
 
 buildTicker();
 buildProjectCards();
