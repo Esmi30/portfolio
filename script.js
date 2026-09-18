@@ -243,10 +243,10 @@ const projects = [
     tags: ['Python', 'Claude API', 'MS Graph API', 'LLM Judge'],
     nda: true,
     screenshots: [],
-    overview: 'Autonomous email pipeline for lead management: layered spam filtering (deterministic rules first, LLM judge only for ambiguous cases), automatic replies, deduplication, special-case routing to partners, and a quote-error watchdog that catches calculation mistakes in outgoing offers before they reach clients.',
-    problem: 'Inbound leads arrived mixed with spam, bounces, and marketing noise. Every email needed manual triage, and calculation errors in outgoing quotes were only caught after clients noticed them.',
+    overview: 'Autonomous email pipeline for lead management: layered spam filtering (deterministic rules first, LLM judge only for ambiguous cases), automatic replies, deduplication, category-based routing rules, and a quote-error watchdog that catches calculation mistakes in outgoing offers before they reach clients.',
+    problem: 'Inbound leads arrive mixed with spam, bounces, and marketing noise. Every email needs manual triage, and quote calculation errors typically surface only after the client notices them.',
     solution: 'Fail-open layered classifier: hard rules decide the clear cases (valid phone patterns, spam keywords, bounce markers), an LLM judge with strict-JSON verdicts handles only the ambiguous middle. A v2 filter ran weeks in shadow mode, logging divergences against production before any promotion decision. A separate watchdog re-checks totals in outgoing quotes every 5 minutes and alerts on anomalies.',
-    flow: ['Inbound email polled from mailbox', 'Deterministic rules: obvious lead / obvious spam', 'Ambiguous → LLM judge (strict-JSON verdict)', 'Lead logged to CRM sheet + auto-reply sent', 'Special categories forwarded to partner company', 'Outgoing quotes monitored for calculation errors'],
+    flow: ['Inbound email polled from mailbox', 'Deterministic rules: obvious lead / obvious spam', 'Ambiguous → LLM judge (strict-JSON verdict)', 'Lead logged to CRM sheet + auto-reply sent', 'Category-based routing to an external partner', 'Outgoing quotes monitored for calculation errors'],
     tech: ['Python', 'MS Graph API', 'Claude API', 'SQLite', 'cron', 'shadow-mode rollout'],
     challenges: [
       { p: 'LLM verdicts were non-deterministic on short messages, risking lost leads', s: 'Inverted the design: deterministic rules can only SAVE a lead, the AI is consulted only when rules are silent, and the system fails open (doubt = lead)' },
